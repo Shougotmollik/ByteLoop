@@ -1,4 +1,6 @@
-import 'package:byteloop/views/splash_screen/splash_screen.dart';
+import 'package:byteloop/routes/route.dart';
+import 'package:byteloop/routes/route_names.dart';
+import 'package:byteloop/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -7,6 +9,11 @@ class ByteLoopApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(home: SplashScreen());
+    return GetMaterialApp(
+      title: 'ByteLoop',
+      theme: darkTheme,
+      getPages: Routes.getPages,
+      initialRoute: RouteNames.splashScreen,
+    );
   }
 }

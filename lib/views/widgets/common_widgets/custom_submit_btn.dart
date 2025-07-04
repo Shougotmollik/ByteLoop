@@ -1,0 +1,32 @@
+import 'package:flutter/material.dart';
+
+class CustomSubmitBtn extends StatelessWidget {
+  const CustomSubmitBtn({
+    super.key,
+    required this.onTap,
+    required this.btnText,
+  });
+  final VoidCallback onTap;
+  final String btnText;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: 60,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Color(0xff1B1E20),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Center(
+          child: Text(
+            btnText,
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+          ),
+        ),
+      ),
+    );
+  }
+}
