@@ -14,9 +14,9 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   Future<void> _moveToNextScreen() async {
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(Duration(seconds: 2), () {
       if (mounted) {
-        Get.offNamed(RouteNames.loginScreen);
+        Get.offNamed(RouteNames.welcomeScreen);
       }
     });
   }

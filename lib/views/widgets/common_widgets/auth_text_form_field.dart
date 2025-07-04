@@ -50,7 +50,7 @@ class _AuthTextFormFieldState extends State<AuthTextFormField> {
             borderSide: BorderSide.none,
           ),
           prefixIcon: Icon(widget.prefixIcon),
-          hintText: 'Enter Your Email',
+          hintText: widget.hintText,
           hintStyle: TextStyle(
             fontSize: 15,
             color: Colors.white70,

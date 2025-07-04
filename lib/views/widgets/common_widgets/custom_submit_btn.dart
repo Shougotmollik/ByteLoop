@@ -17,7 +17,7 @@ class CustomSubmitBtn extends StatelessWidget {
         height: 60,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: Color(0xff1B1E20),
+          color: Color(0xff141718),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Center(
