@@ -2,6 +2,7 @@ import 'package:byteloop/constant/app_assets.dart';
 import 'package:byteloop/constant/app_colors.dart';
 import 'package:byteloop/constant/app_string.dart';
 import 'package:byteloop/routes/route_names.dart';
+import 'package:byteloop/services/storage_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +17,11 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> _moveToNextScreen() async {
     Future.delayed(Duration(seconds: 2), () {
       if (mounted) {
-        Get.offNamed(RouteNames.welcomeScreen);
+        Get.offNamed(
+          StorageService.userSession != null
+              ? RouteNames.mainNavBarScreen
+              : RouteNames.welcomeScreen,
+        );
       }
     });
   }

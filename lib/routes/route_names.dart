@@ -3,4 +3,6 @@ class RouteNames {
   static String loginScreen = '/loginScreen';
   static String registerScreen = '/registerScreen';
   static String welcomeScreen = '/welcomeScreen';
+
+  static String mainNavBarScreen = '/mainNavBarScreen';
 }

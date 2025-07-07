@@ -3,6 +3,7 @@ import 'package:byteloop/views/auth/login_screen.dart';
 import 'package:byteloop/views/auth/register_screen.dart';
 import 'package:byteloop/views/auth/splash_screen.dart';
 import 'package:byteloop/views/auth/welcome_screen.dart';
+import 'package:byteloop/views/main_navbar/main_nav_bar_screen.dart';
 import 'package:get/get.dart';
 
 class Routes {
@@ -27,6 +28,12 @@ class Routes {
       name: RouteNames.welcomeScreen,
       page: () => WelcomeScreen(),
       transition: Transition.fade,
+    ),
+
+    GetPage(
+      name: RouteNames.mainNavBarScreen,
+      page: () => MainNavBarScreen(),
+      transition: Transition.fadeIn,
     ),
   ];
 }

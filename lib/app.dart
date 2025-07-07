@@ -1,3 +1,4 @@
+import 'package:byteloop/controller_binder.dart';
 import 'package:byteloop/routes/route.dart';
 import 'package:byteloop/routes/route_names.dart';
 import 'package:byteloop/theme/theme.dart';
@@ -14,6 +15,7 @@ class ByteLoopApp extends StatelessWidget {
       theme: darkTheme,
       getPages: Routes.getPages,
       initialRoute: RouteNames.splashScreen,
+      initialBinding: ControllerBinder(),
     );
   }
 }

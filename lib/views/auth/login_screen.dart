@@ -1,4 +1,5 @@
 import 'package:byteloop/constant/app_colors.dart';
+import 'package:byteloop/controllers/auth_controller.dart';
 import 'package:byteloop/routes/route_names.dart';
 import 'package:byteloop/utils/form_validator.dart';
 import 'package:byteloop/views/widgets/common_widgets/auth_text_form_field.dart';
@@ -23,6 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final FormValidator _formValidator = FormValidator();
 
+  final AuthController _authController = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +83,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
 
                     const SizedBox(height: 12),
-                    CustomSubmitBtn(onTap: _loginButton, btnText: 'Login'),
+                    Obx(
+                      () => CustomSubmitBtn(
+                        onTap: _loginButton,
+                        btnText: _authController.loginLoading.value
+                            ? 'Loading..'
+                            : 'Login',
+                      ),
+                    ),
+
                     const SizedBox(height: 12),
                     CustomRichText(
                       firstText: 'Create New Account?',
@@ -131,6 +141,11 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _loginButton() {
-    _formValidator.validateAndProceed(_formKey, () {});
+    _formValidator.validateAndProceed(_formKey, () {
+      _authController.login(
+        _emailTEController.text,
+        _passwordTEController.text,
+      );
+    });
   }
 }

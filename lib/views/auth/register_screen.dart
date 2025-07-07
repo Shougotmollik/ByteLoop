@@ -1,4 +1,5 @@
 import 'package:byteloop/constant/app_colors.dart';
+import 'package:byteloop/controllers/auth_controller.dart';
 import 'package:byteloop/routes/route_names.dart';
 import 'package:byteloop/utils/form_validator.dart';
 import 'package:byteloop/views/widgets/common_widgets/auth_text_form_field.dart';
@@ -23,6 +24,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final FormValidator _formValidator = FormValidator();
+
+  final AuthController _authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +55,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                     const SizedBox(height: 28),
-
                     AuthTextFormField(
                       hintText: 'Full Name ',
                       prefixIcon: Icons.person_2_rounded,
@@ -76,10 +78,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
 
                     const SizedBox(height: 28),
-                    CustomSubmitBtn(
-                      onTap: _registerButton,
-                      btnText: 'Register',
+
+                    Obx(
+                      () => CustomSubmitBtn(
+                        onTap: _registerButton,
+                        btnText: _authController.loginLoading.value
+                            ? 'Loading..'
+                            : 'Register',
+                      ),
                     ),
+
                     const SizedBox(height: 12),
                     CustomRichText(
                       firstText: 'Already Have An Account?',
@@ -129,6 +137,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   void _registerButton() {
-    _formValidator.validateAndProceed(_formKey, () {});
+    _formValidator.validateAndProceed(_formKey, () {
+      _authController.register(
+        _nameTEController.text,
+        _emailTEController.text,
+        _passwordTEController.text,
+      );
+    });
   }
 }
