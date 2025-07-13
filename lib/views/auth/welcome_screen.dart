@@ -1,8 +1,9 @@
 import 'package:byteloop/constant/app_assets.dart';
 import 'package:byteloop/constant/app_colors.dart';
 import 'package:byteloop/routes/route_names.dart';
-import 'package:byteloop/views/widgets/common_widgets/custom_social_btn.dart';
-import 'package:byteloop/views/widgets/common_widgets/custom_submit_btn.dart';
+import 'package:byteloop/views/widgets/auth/common_widgets/custom_social_btn.dart';
+import 'package:byteloop/views/widgets/auth/common_widgets/custom_submit_btn.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,11 +13,12 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14.0),
+              padding: const EdgeInsets.symmetric(horizontal: 18.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -58,18 +60,23 @@ class WelcomeScreen extends StatelessWidget {
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    spacing: 18,
                     children: [
-                      CustomSocialBtn(
-                        btnText: 'GOOGLE',
-                        btnColor: AppColors.googleBtnColor.withAlpha(60),
-                        textColor: AppColors.googleBtnColor,
-                        onTap: () {},
+                      Expanded(
+                        child: CustomSocialBtn(
+                          btnText: 'GOOGLE',
+                          btnColor: AppColors.googleBtnColor.withAlpha(60),
+                          textColor: AppColors.googleBtnColor,
+                          onTap: () {},
+                        ),
                       ),
-                      CustomSocialBtn(
-                        btnText: 'FACEBOOK',
-                        btnColor: AppColors.facebookBtnColor.withAlpha(60),
-                        textColor: AppColors.facebookBtnColor,
-                        onTap: () {},
+                      Expanded(
+                        child: CustomSocialBtn(
+                          btnText: 'FACEBOOK',
+                          btnColor: AppColors.facebookBtnColor.withAlpha(60),
+                          textColor: AppColors.facebookBtnColor,
+                          onTap: () {},
+                        ),
                       ),
                     ],
                   ),

@@ -2,11 +2,11 @@ import 'package:byteloop/constant/app_colors.dart';
 import 'package:byteloop/controllers/auth_controller.dart';
 import 'package:byteloop/routes/route_names.dart';
 import 'package:byteloop/utils/form_validator.dart';
-import 'package:byteloop/views/widgets/common_widgets/auth_text_form_field.dart';
-import 'package:byteloop/views/widgets/common_widgets/custom_auth_app_bar.dart';
-import 'package:byteloop/views/widgets/common_widgets/custom_rich_text.dart';
-import 'package:byteloop/views/widgets/common_widgets/custom_social_btn.dart';
-import 'package:byteloop/views/widgets/common_widgets/custom_submit_btn.dart';
+import 'package:byteloop/views/widgets/auth/common_widgets/auth_text_form_field.dart';
+import 'package:byteloop/views/widgets/auth/common_widgets/custom_auth_app_bar.dart';
+import 'package:byteloop/views/widgets/auth/common_widgets/custom_rich_text.dart';
+import 'package:byteloop/views/widgets/auth/common_widgets/custom_social_btn.dart';
+import 'package:byteloop/views/widgets/auth/common_widgets/custom_submit_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -35,7 +35,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         child: Center(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14.0),
+              padding: const EdgeInsets.symmetric(horizontal: 18.0),
               child: Form(
                 key: _formKey,
                 child: Column(
@@ -111,18 +111,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      spacing: 18,
                       children: [
-                        CustomSocialBtn(
-                          btnText: 'GOOGLE',
-                          btnColor: AppColors.googleBtnColor.withAlpha(60),
-                          textColor: AppColors.googleBtnColor,
-                          onTap: () {},
+                        Expanded(
+                          child: CustomSocialBtn(
+                            btnText: 'GOOGLE',
+                            btnColor: AppColors.googleBtnColor.withAlpha(60),
+                            textColor: AppColors.googleBtnColor,
+                            onTap: () {},
+                          ),
                         ),
-                        CustomSocialBtn(
-                          btnText: 'FACEBOOK',
-                          btnColor: AppColors.facebookBtnColor.withAlpha(60),
-                          textColor: AppColors.facebookBtnColor,
-                          onTap: () {},
+                        Expanded(
+                          child: CustomSocialBtn(
+                            btnText: 'FACEBOOK',
+                            btnColor: AppColors.facebookBtnColor.withAlpha(60),
+                            textColor: AppColors.facebookBtnColor,
+                            onTap: () {},
+                          ),
                         ),
                       ],
                     ),

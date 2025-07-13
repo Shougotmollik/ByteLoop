@@ -39,7 +39,7 @@ class Routes {
     GetPage(
       name: RouteNames.editProfileScreen,
       page: () => const EditProfileScreen(),
-      transition: Transition.rightToLeft,
+      transition: Transition.leftToRight,
     ),
   ];
 }

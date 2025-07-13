@@ -29,7 +29,7 @@ class AuthController extends GetxController {
       }
     } on AuthException catch (error) {
       registerLoading.value = false;
-      showSnackBar('Error', error.message);
+      showSnackBar('Some thing wrong!', error.message);
     }
   }
 
@@ -49,7 +49,7 @@ class AuthController extends GetxController {
       }
     } on AuthException catch (error) {
       loginLoading.value = false;
-      showSnackBar('Error', error.message);
+      showSnackBar('Some thing wrong!', error.message);
     }
   }
 }

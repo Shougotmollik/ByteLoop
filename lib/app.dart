@@ -13,6 +13,7 @@ class ByteLoopApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'ByteLoop',
       theme: darkTheme,
+      debugShowCheckedModeBanner: false,
       getPages: Routes.getPages,
       initialRoute: RouteNames.splashScreen,
       initialBinding: ControllerBinder(),

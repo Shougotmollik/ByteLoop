@@ -26,7 +26,7 @@ class _AuthTextFormFieldState extends State<AuthTextFormField> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xff1E1E1E),
+        color: const Color(0xff232627),
         borderRadius: BorderRadius.circular(12),
       ),
       child: TextFormField(
