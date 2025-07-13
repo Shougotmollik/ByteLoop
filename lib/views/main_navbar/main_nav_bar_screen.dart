@@ -30,7 +30,7 @@ class _MainNavBarScreenState extends State<MainNavBarScreen> {
           onDestinationSelected: (value) => _navBarService.updateIndex(value),
           animationDuration: const Duration(milliseconds: 500),
 
-          destinations: [
+          destinations: const [
             NavigationDestination(
               icon: Icon(Iconsax.home_1_copy),
               selectedIcon: Icon(Iconsax.home),

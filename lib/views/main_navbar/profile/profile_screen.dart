@@ -16,9 +16,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {},
-          icon: Icon(Icons.language_outlined),
+          icon: const Icon(Icons.language_outlined),
         ),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.sort_sharp))],
+        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.sort_sharp))],
       ),
       body: DefaultTabController(
         length: 2,
@@ -54,7 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                             ],
                           ),
-                          CircleAvatar(
+                          const CircleAvatar(
                             radius: 48,
                             backgroundImage: NetworkImage(
                               'https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Photos.png',
@@ -62,7 +62,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 12),
+                      const SizedBox(height: 12),
                       Row(
                         children: [
                           Expanded(
@@ -72,7 +72,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               child: const Text('Edit Profile'),
                             ),
                           ),
-                          SizedBox(width: 20),
+                          const SizedBox(width: 20),
                           Expanded(
                             child: OutlinedButton(
                               style: customOutlineStyle(),
@@ -103,7 +103,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ];
           },
-          body: TabBarView(
+          body: const TabBarView(
             children: [Text('I am Queries'), Text('I am Replies')],
           ),
         ),

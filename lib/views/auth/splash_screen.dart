@@ -15,7 +15,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   Future<void> _moveToNextScreen() async {
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 2), () {
       if (mounted) {
         Get.offNamed(
           StorageService.userSession != null
@@ -50,8 +50,8 @@ class _SplashScreenState extends State<SplashScreen> {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 8),
-            Text(
+            const SizedBox(height: 8),
+            const Text(
               AppString.appVersion,
               style: TextStyle(
                 color: AppColors.greyColor,
@@ -60,7 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 letterSpacing: 1.4,
               ),
             ),
-            SizedBox(height: 28),
+            const SizedBox(height: 28),
           ],
         ),
       ),

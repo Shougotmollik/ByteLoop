@@ -14,7 +14,7 @@ class CustomAuthAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: Container(
           margin: const EdgeInsets.all(8.0),
           decoration: BoxDecoration(
-            color: Color(0xff232627),
+            color: const Color(0xff232627),
             borderRadius: BorderRadius.circular(12),
           ),
           child: const Icon(
@@ -28,5 +28,5 @@ class CustomAuthAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

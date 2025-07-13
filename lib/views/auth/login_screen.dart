@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAuthAppBar(),
+      appBar: const CustomAuthAppBar(),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Align(
+                    const Align(
                       alignment: Alignment.topLeft,
                       child: SizedBox(
                         width: 200,
@@ -72,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       alignment: Alignment.topRight,
                       child: TextButton(
                         onPressed: () {},
-                        child: Text(
+                        child: const Text(
                           'Forgot Password ?',
                           style: TextStyle(
                             fontSize: 15.5,
@@ -103,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 18),
                     Divider(color: Colors.grey.shade600, thickness: 1),
                     const SizedBox(height: 18),
-                    Text(
+                    const Text(
                       'Continue With Accounts',
                       style: TextStyle(
                         fontWeight: FontWeight.w400,

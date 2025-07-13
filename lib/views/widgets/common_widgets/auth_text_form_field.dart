@@ -26,7 +26,7 @@ class _AuthTextFormFieldState extends State<AuthTextFormField> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Color(0xff1E1E1E),
+        color: const Color(0xff1E1E1E),
         borderRadius: BorderRadius.circular(12),
       ),
       child: TextFormField(
@@ -51,7 +51,7 @@ class _AuthTextFormFieldState extends State<AuthTextFormField> {
           ),
           prefixIcon: Icon(widget.prefixIcon),
           hintText: widget.hintText,
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             fontSize: 15,
             color: Colors.white70,
             fontWeight: FontWeight.w400,

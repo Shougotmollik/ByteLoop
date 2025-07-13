@@ -49,7 +49,7 @@ class WelcomeScreen extends StatelessWidget {
                     btnText: 'Register',
                   ),
                   const SizedBox(height: 58),
-                  Text(
+                  const Text(
                     'Continue With Accounts',
                     style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
                   ),

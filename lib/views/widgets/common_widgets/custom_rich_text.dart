@@ -16,11 +16,11 @@ class CustomRichText extends StatelessWidget {
     return Text.rich(
       TextSpan(
         text: firstText,
-        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
         children: [
           TextSpan(
             text: secondText,
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             recognizer: TapGestureRecognizer()..onTap = onTap,
           ),
         ],

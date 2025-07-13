@@ -17,13 +17,13 @@ class CustomSubmitBtn extends StatelessWidget {
         height: 60,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: Color(0xff141718),
+          color: const Color(0xff141718),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Center(
           child: Text(
             btnText,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
           ),
         ),
       ),

@@ -30,7 +30,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAuthAppBar(),
+      appBar: const CustomAuthAppBar(),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -41,7 +41,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Align(
+                    const Align(
                       alignment: Alignment.topLeft,
                       child: SizedBox(
                         width: 200,
@@ -99,7 +99,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 18),
                     Divider(color: Colors.grey.shade600, thickness: 1),
                     const SizedBox(height: 18),
-                    Text(
+                    const Text(
                       'Continue With Accounts',
                       style: TextStyle(
                         fontWeight: FontWeight.w400,

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 final ThemeData darkTheme = ThemeData(
   useMaterial3: true,
   brightness: Brightness.dark,
-  colorScheme: ColorScheme.dark(
+  colorScheme: const ColorScheme.dark(
     brightness: Brightness.dark,
     surface: Colors.black,
     onSurface: Colors.white,
@@ -11,7 +11,7 @@ final ThemeData darkTheme = ThemeData(
     primary: Colors.white,
     onPrimary: Colors.black12,
   ),
-  appBarTheme: AppBarTheme(
+  appBarTheme: const AppBarTheme(
     backgroundColor: Colors.black,
     surfaceTintColor: Colors.black,
     elevation: 0.0,
@@ -22,7 +22,7 @@ final ThemeData darkTheme = ThemeData(
     indicatorColor: Colors.transparent,
     backgroundColor: Colors.black,
     iconTheme: WidgetStateProperty.all<IconThemeData>(
-      IconThemeData(color: Colors.white, size: 30),
+      const IconThemeData(color: Colors.white, size: 30),
     ),
   ),
 );
