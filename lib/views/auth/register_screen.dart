@@ -28,6 +28,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final AuthController _authController = Get.find<AuthController>();
 
   @override
+  void dispose() {
+    _nameTEController.dispose();
+    _emailTEController.dispose();
+    _passwordTEController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAuthAppBar(),

@@ -1,6 +1,9 @@
+import 'package:byteloop/controllers/profile_controller.dart';
 import 'package:byteloop/routes/route_names.dart';
+import 'package:byteloop/services/supabase_service.dart';
 import 'package:byteloop/utils/styles/button_styles.dart';
 import 'package:byteloop/views/widgets/nav_bar/common_widget/custom_radial_background.dart';
+import 'package:byteloop/views/widgets/nav_bar/profile/custom_circle_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +15,9 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final ProfileController profileController = Get.find<ProfileController>();
+  final SupabaseService supabaseService = Get.find<SupabaseService>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,34 +46,44 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 14.0),
                     child: Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  "Shougot.dev",
-                                  style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w500,
+                        Obx(
+                          () => Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    supabaseService
+                                        .currentUser
+                                        .value!
+                                        .userMetadata?['name'],
+                                    style: const TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  width: context.width * 0.60,
-                                  child: const Text(
-                                    "Let's build Social networking App Let's build Social networking App",
+                                  SizedBox(
+                                    width: context.width * 0.60,
+                                    child: Text(
+                                      supabaseService
+                                              .currentUser
+                                              .value!
+                                              .userMetadata?["description"] ??
+                                          "Welcome to byteLoop🙂.Add your description📋",
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            const CircleAvatar(
-                              radius: 48,
-                              backgroundImage: NetworkImage(
-                                'https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Photos.png',
+                                ],
                               ),
-                            ),
-                          ],
+                              CustomCircleAvatar(
+                                radius: 48,
+                                url: supabaseService
+                                    .currentUser
+                                    .value
+                                    ?.userMetadata?['image'],
+                              ),
+                            ],
+                          ),
                         ),
                         const SizedBox(height: 12),
                         Row(
@@ -128,6 +144,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 // * Sliver Persistent Header Class
 class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   final TabBar _tabBar;
+
   SliverAppBarDelegate(this._tabBar);
 
   @override

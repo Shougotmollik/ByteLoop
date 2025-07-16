@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:byteloop/utils/env.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:get/get.dart';
@@ -42,4 +43,10 @@ Future<File> compressImage(File file, String targetPath) async {
     quality: 70,
   );
   return File(result!.path);
+}
+
+//* to get s3 url image
+
+String getS3Url(String path) {
+  return "${Env.supabaseUrl}/storage/v1/object/public/$path";
 }

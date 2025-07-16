@@ -26,6 +26,14 @@ class _LoginScreenState extends State<LoginScreen> {
   final FormValidator _formValidator = FormValidator();
 
   final AuthController _authController = Get.find<AuthController>();
+
+  @override
+  void dispose() {
+    _emailTEController.dispose();
+    _passwordTEController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
