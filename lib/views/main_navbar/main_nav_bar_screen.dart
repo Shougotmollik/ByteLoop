@@ -42,8 +42,8 @@ class _MainNavBarScreenState extends State<MainNavBarScreen> {
               label: 'Search',
             ),
             NavigationDestination(
-              icon: Icon(Iconsax.edit_copy),
-              selectedIcon: Icon(Iconsax.edit_2),
+              icon: Icon(Iconsax.add_square_copy),
+              selectedIcon: Icon(Iconsax.add_square),
               label: 'Query',
             ),
             NavigationDestination(

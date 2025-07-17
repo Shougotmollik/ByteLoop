@@ -11,7 +11,7 @@ class NavBarService extends GetxService {
   var currentIndex = 0.obs;
   var previousIndex = 0.obs;
 
-  final List<Widget> screens = const[
+  final List<Widget> screens = const [
     HomeScreen(),
     SearchScreen(),
     AddQueryScreen(),
@@ -19,11 +19,12 @@ class NavBarService extends GetxService {
     ProfileScreen(),
   ];
 
-  void updateIndex(int index){
-    previousIndex.value=currentIndex.value;
-    currentIndex.value=index;
-
-
+  void updateIndex(int index) {
+    previousIndex.value = currentIndex.value;
+    currentIndex.value = index;
   }
 
+  void selectedHomeScreen() {
+    updateIndex(0);
+  }
 }
