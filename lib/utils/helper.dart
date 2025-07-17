@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:byteloop/utils/env.dart';
+import 'package:byteloop/views/widgets/nav_bar/common_widget/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:get/get.dart';
@@ -46,7 +47,15 @@ Future<File> compressImage(File file, String targetPath) async {
 }
 
 //* to get s3 url image
-
 String getS3Url(String path) {
   return "${Env.supabaseUrl}/storage/v1/object/public/$path";
+}
+
+// * confirm dialog
+void confirmDialog({
+  required String title,
+  required String text,
+  required VoidCallback onTap,
+}) {
+  Get.dialog(ConfirmDialog(title: title, text: text, onTap: onTap));
 }

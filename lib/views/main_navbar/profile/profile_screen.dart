@@ -27,7 +27,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           icon: const Icon(Icons.language_outlined),
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.sort_sharp)),
+          IconButton(
+            onPressed: () => Get.toNamed(RouteNames.settingsScreens),
+            icon: const Icon(Icons.sort_sharp),
+          ),
         ],
       ),
       extendBodyBehindAppBar: true,

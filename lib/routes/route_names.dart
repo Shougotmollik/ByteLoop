@@ -5,5 +5,6 @@ class RouteNames {
   static String welcomeScreen = '/welcomeScreen';
 
   static String mainNavBarScreen = '/mainNavBarScreen';
-  static String editProfileScreen='/editProfileScreen';
+  static String editProfileScreen = '/editProfileScreen';
+  static String settingsScreens = '/settingsScreens';
 }

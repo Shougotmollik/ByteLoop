@@ -132,7 +132,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       ),
       elevation: 0.0,
       backgroundColor: Colors.transparent,
-      title: const Text('Profile'),
+      title: const Text('Edit Profile'),
       actions: [
         Obx(
           () => TextButton(

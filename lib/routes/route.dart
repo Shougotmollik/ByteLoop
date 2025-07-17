@@ -5,6 +5,7 @@ import 'package:byteloop/views/auth/splash_screen.dart';
 import 'package:byteloop/views/auth/welcome_screen.dart';
 import 'package:byteloop/views/main_navbar/main_nav_bar_screen.dart';
 import 'package:byteloop/views/main_navbar/profile/edit_profile_screen.dart';
+import 'package:byteloop/views/main_navbar/settings/settings_screen.dart';
 import 'package:get/get.dart';
 
 class Routes {
@@ -40,6 +41,11 @@ class Routes {
       name: RouteNames.editProfileScreen,
       page: () => const EditProfileScreen(),
       transition: Transition.leftToRight,
+    ),
+    GetPage(
+      name: RouteNames.settingsScreens,
+      page: () => const SettingsScreen(),
+      transition: Transition.rightToLeftWithFade,
     ),
   ];
 }
