@@ -24,7 +24,8 @@ class NavBarService extends GetxService {
     currentIndex.value = index;
   }
 
-  void selectedHomeScreen() {
-    updateIndex(0);
+  //   Back to previous screen
+  void backToPreviousScreen() {
+    currentIndex.value = previousIndex.value;
   }
 }

@@ -1,7 +1,10 @@
+import 'package:byteloop/constant/app_colors.dart';
 import 'package:byteloop/controllers/query_controller.dart';
 import 'package:byteloop/services/nav_bar_service.dart';
 import 'package:byteloop/services/supabase_service.dart';
 import 'package:byteloop/views/main_navbar/query/add_query_app_bar.dart';
+import 'package:byteloop/views/main_navbar/query/image_preview.dart';
+import 'package:byteloop/views/main_navbar/query/video_preview.dart';
 import 'package:byteloop/views/widgets/nav_bar/common_widget/custom_radial_background.dart';
 import 'package:byteloop/views/widgets/nav_bar/profile/custom_circle_avatar.dart';
 import 'package:flutter/material.dart';
@@ -28,11 +31,46 @@ class _AddQueryScreenState extends State<AddQueryScreen> {
             child: Padding(
               padding: const EdgeInsets.all(18.0),
               child: Column(
-                children: [
-                  AddQueryAppBar(
-                    tapCloseQuery: () => navBarService.selectedHomeScreen(),
-                    tapPost: () {},
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      AddQueryAppBar(
+                        tapCloseQuery: () =>
+                            navBarService.backToPreviousScreen(),
+                      ),
+                      Obx(
+                        () => IconButton(
+                          onPressed: () {
+                            if (queryController.content.value.isNotEmpty) {
+                              queryController.store(
+                                supabaseService.currentUser.value!.id,
+                              );
+                            }
+                          },
+                          icon: queryController.loading.value
+                              ? const SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircularProgressIndicator(
+                                    color: AppColors.purpleBgColor,
+                                  ),
+                                )
+                              : Icon(
+                                  Icons.send_outlined,
+                                  size: 22,
+                                  color:
+                                      queryController.content.value.isNotEmpty
+                                      ? Colors.white
+                                      : Colors.white24,
+                                ),
+                        ),
+                      ),
+                    ],
                   ),
+                  const Divider(color: Colors.white24, thickness: 0.75),
+                  const SizedBox(height: 4.0),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     spacing: 12,
@@ -85,9 +123,26 @@ class _AddQueryScreenState extends State<AddQueryScreen> {
   }
 
   Widget _buildAssetsSelectionBtn() {
-    return IconButton(
-      onPressed: () => queryController.pickImage(),
-      icon: const Icon(Icons.attachment, color: Colors.white, size: 28),
+    return Row(
+      children: [
+        IconButton(
+          onPressed: () => queryController.pickImage(),
+          icon: const Icon(
+            Icons.perm_media_outlined,
+            color: Colors.white54,
+            size: 26,
+          ),
+        ),
+
+        IconButton(
+          onPressed: () => queryController.pickVideo(),
+          icon: const Icon(
+            Icons.video_camera_back_outlined,
+            color: Colors.white54,
+            size: 28,
+          ),
+        ),
+      ],
     );
   }
 
@@ -95,35 +150,16 @@ class _AddQueryScreenState extends State<AddQueryScreen> {
     return Column(
       children: [
         if (queryController.image.value != null)
-          Stack(
-            alignment: Alignment.topRight,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadiusGeometry.circular(10),
-                child: Image.file(
-                  queryController.image.value!,
-                  fit: BoxFit.cover,
-                  alignment: Alignment.topCenter,
-                ),
-              ),
-              Positioned(
-                right: 8,
-                top: 8,
-                child: CircleAvatar(
-                  backgroundColor: Colors.black45,
-                  child: IconButton(
-                    onPressed: () {
-                      queryController.image.value = null;
-                    },
-                    icon: const Icon(
-                      Icons.close_rounded,
-                      color: Colors.white,
-                      weight: 50,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+          ImagePreview(
+            image: queryController.image.value!,
+            onRemove: () => queryController.image.value = null,
+          ),
+        const SizedBox(height: 12),
+
+        if (queryController.video.value != null)
+          VideoPreview(
+            video: queryController.video.value!,
+            onRemove: () => queryController.video.value = null,
           ),
       ],
     );

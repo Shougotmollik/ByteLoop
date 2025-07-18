@@ -8,6 +8,10 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
+// * image picker and uuid instance
+const uuid = Uuid();
+final ImagePicker picker = ImagePicker();
+
 void showSnackBar(String title, String message) {
   Get.snackbar(
     title,
@@ -23,17 +27,26 @@ void showSnackBar(String title, String message) {
 
 //* pick Image from gallery
 Future<File?> pickImageFromGallery() async {
-  const uuid = Uuid();
-  final ImagePicker picker = ImagePicker();
-
   final XFile? file = await picker.pickImage(source: ImageSource.gallery);
   if (file == null) return null;
 
   final dir = Directory.systemTemp;
   final targetPath = "${dir.absolute.path}/${uuid.v8()}.jpg";
-  File image = await compressImage(File(file.path), targetPath);
 
+  File image = await compressImage(File(file.path), targetPath);
   return image;
+}
+
+// * pick video from gallery
+Future<File?> pickVideoFromGallery() async {
+  final XFile? file = await picker.pickVideo(source: ImageSource.gallery);
+  if (file == null) return null;
+
+  final dir = Directory.systemTemp;
+  final targetPath = "${dir.absolute.path}/${uuid.v8()}.mp4";
+
+  File video = await File(file.path).copy(targetPath);
+  return video;
 }
 
 //* Compress image file
