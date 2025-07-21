@@ -42,6 +42,7 @@ Future<File?> pickVideoFromGallery() async {
   final XFile? file = await picker.pickVideo(source: ImageSource.gallery);
   if (file == null) return null;
 
+  // copy video to temporary directory
   final dir = Directory.systemTemp;
   final targetPath = "${dir.absolute.path}/${uuid.v8()}.mp4";
 

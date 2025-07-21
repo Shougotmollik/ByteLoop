@@ -5,6 +5,7 @@ class ImagePreview extends StatelessWidget {
   final File image;
   final VoidCallback onRemove;
 
+
   const ImagePreview({super.key, required this.image, required this.onRemove});
 
   @override

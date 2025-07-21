@@ -13,6 +13,9 @@ class QueryController extends GetxController {
   final TextEditingController queryTEController = TextEditingController();
   var content = ''.obs;
   var loading = false.obs;
+  var isUploading = false.obs;
+  var isPicking = false.obs;
+
   Rx<File?> image = Rx<File?>(null);
   Rx<File?> video = Rx<File?>(null);
 
@@ -24,17 +27,53 @@ class QueryController extends GetxController {
 
   // pick image
   void pickImage() async {
-    File? file = await pickImageFromGallery();
-    if (file != null) {
-      image.value = file;
+    if (isPicking.value) return;
+    isPicking.value = true;
+
+    try {
+      File? file = await pickImageFromGallery();
+      if (file != null) {
+        image.value = file;
+        // video.value = null; // Clear video if image picked
+      } else {
+        showSnackBar('Info', 'Image selection cancelled');
+      }
+    } catch (e) {
+      showSnackBar('Error', 'Failed to pick image');
+    } finally {
+      isPicking.value = false;
     }
   }
 
   //  pick video
   void pickVideo() async {
-    File? file = await pickVideoFromGallery();
-    if (file != null) {
+    if (isPicking.value) return;
+    isPicking.value = true;
+
+    try {
+      File? file = await pickVideoFromGallery();
+
+      if (file == null) {
+        // user cancelled picker
+        isPicking.value = false;
+        return;
+      }
+
+      final int sizeInBytes = await file.length();
+      final double sizeInMB = sizeInBytes / (1024 * 1024);
+
+      if (sizeInMB > 200) {
+        showSnackBar('Error', 'Video size exceeds 200 MB.');
+        isPicking.value = false;
+        return;
+      }
+
       video.value = file;
+      // image.value = null; // if you want to clear image selection
+    } catch (e) {
+      showSnackBar('Error', 'Failed to pick video');
+    } finally {
+      isPicking.value = false;
     }
   }
 
@@ -42,9 +81,12 @@ class QueryController extends GetxController {
   void store(String userId) async {
     try {
       loading.value = true;
+      isUploading.value = true;
+
       const Uuid uuid = Uuid();
       final dir = "$userId/${uuid.v8()}";
       var assetPath = "";
+
       // * upload image if selected
       if (image.value != null && image.value!.existsSync()) {
         assetPath = await SupabaseService.client.storage
@@ -79,6 +121,9 @@ class QueryController extends GetxController {
     } catch (error) {
       loading.value = false;
       showSnackBar('Failed!', 'Something went wrong');
+    } finally {
+      loading.value = false;
+      isUploading.value = false;
     }
   }
 

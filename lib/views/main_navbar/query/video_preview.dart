@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:byteloop/constant/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -44,9 +43,7 @@ class _VideoPreviewState extends State<VideoPreview> {
   @override
   Widget build(BuildContext context) {
     if (!_isInitialized) {
-      return const Center(
-        child: CircularProgressIndicator(color: AppColors.purpleBgColor),
-      );
+      return const Center(child: CircularProgressIndicator.adaptive());
     }
 
     return Stack(

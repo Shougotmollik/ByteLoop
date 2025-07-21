@@ -107,7 +107,14 @@ class _AddQueryScreenState extends State<AddQueryScreen> {
                             _buildAssetsSelectionBtn(),
 
                             // To preview selected Assets section
-                            Obx(() => _buildAssetsPreviewSection()),
+                            Obx(() {
+                              if (queryController.isPicking.value) {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+                              return _buildAssetsPreviewSection();
+                            }),
                           ],
                         ),
                       ),
@@ -123,44 +130,57 @@ class _AddQueryScreenState extends State<AddQueryScreen> {
   }
 
   Widget _buildAssetsSelectionBtn() {
-    return Row(
-      children: [
-        IconButton(
-          onPressed: () => queryController.pickImage(),
-          icon: const Icon(
-            Icons.perm_media_outlined,
-            color: Colors.white54,
-            size: 26,
-          ),
-        ),
+    return Obx(() {
+      final isPicking = queryController.isPicking.value;
 
-        IconButton(
-          onPressed: () => queryController.pickVideo(),
-          icon: const Icon(
-            Icons.video_camera_back_outlined,
-            color: Colors.white54,
-            size: 28,
+      return Row(
+        children: [
+          IconButton(
+            onPressed: isPicking ? null : () => queryController.pickImage(),
+            icon: const Icon(
+              Icons.perm_media_outlined,
+              color: Colors.white54,
+              size: 26,
+            ),
           ),
-        ),
-      ],
-    );
+          IconButton(
+            onPressed: isPicking ? null : () => queryController.pickVideo(),
+            icon: const Icon(
+              Icons.video_camera_back_outlined,
+              color: Colors.white54,
+              size: 28,
+            ),
+          ),
+        ],
+      );
+    });
   }
 
   Widget _buildAssetsPreviewSection() {
     return Column(
       children: [
-        if (queryController.image.value != null)
-          ImagePreview(
-            image: queryController.image.value!,
-            onRemove: () => queryController.image.value = null,
-          ),
+        Obx(() {
+          final img = queryController.image.value;
+          if (img != null) {
+            return ImagePreview(
+              image: img,
+              onRemove: () => queryController.image.value = null,
+            );
+          }
+          return const SizedBox.shrink();
+        }),
         const SizedBox(height: 12),
+        Obx(() {
+          final vid = queryController.video.value;
 
-        if (queryController.video.value != null)
-          VideoPreview(
-            video: queryController.video.value!,
-            onRemove: () => queryController.video.value = null,
-          ),
+          if (vid != null) {
+            return VideoPreview(
+              video: vid,
+              onRemove: () => queryController.video.value = null,
+            );
+          }
+          return const SizedBox.shrink();
+        }),
       ],
     );
   }
