@@ -54,3 +54,28 @@ create trigger on_auth_user_updated
 
 
 
+
+  ---------user data --- structure------
+  {
+      "id": 6,
+      "content": "testing text , image , video",
+      "assets": "byteloop-s3/37a3889b-1554-406f-a3e5-ae26a11ebd2d/20250724-0803-8543-9568-057bda65027b",
+      "created_at": "2025-07-24T08:03:44.795002+00:00",
+      "comment_count": 0,
+      "like_count": 0,
+      "user_id": "37a3889b-1554-406f-a3e5-ae26a11ebd2d",
+      "user": {
+          "email": "shougot@gmail.com",
+          "metadata": {
+              "sub": "37a3889b-1554-406f-a3e5-ae26a11ebd2d",
+              "name": "Shougot Mollik",
+              "email": "shougot@gmail.com",
+              "image": "byteloop-s3/37a3889b-1554-406f-a3e5-ae26a11ebd2d/profile.jpg",
+              "description": "testing description",
+              "email_verified": true,
+              "phone_verified": false
+          }
+      }
+  }
+
+

@@ -34,7 +34,7 @@ class QueryController extends GetxController {
       File? file = await pickImageFromGallery();
       if (file != null) {
         image.value = file;
-        // video.value = null; // Clear video if image picked
+        video.value = null; // Clear video if image picked
       } else {
         showSnackBar('Info', 'Image selection cancelled');
       }
@@ -69,7 +69,7 @@ class QueryController extends GetxController {
       }
 
       video.value = file;
-      // image.value = null; // if you want to clear image selection
+      image.value = null; // if you want to clear image selection
     } catch (e) {
       showSnackBar('Error', 'Failed to pick video');
     } finally {

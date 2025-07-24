@@ -1,4 +1,5 @@
 import 'package:byteloop/controllers/auth_controller.dart';
+import 'package:byteloop/controllers/home_controller.dart';
 import 'package:byteloop/controllers/profile_controller.dart';
 import 'package:byteloop/controllers/query_controller.dart';
 import 'package:byteloop/controllers/settings_controller.dart';
@@ -11,6 +12,7 @@ class ControllerBinder extends Bindings {
   void dependencies() {
     Get.put(AuthController());
     Get.put(ProfileController());
+    Get.lazyPut<HomeController>(() => HomeController());
     Get.lazyPut<SettingsController>(() => SettingsController());
     Get.lazyPut<QueryController>(() => QueryController());
 
