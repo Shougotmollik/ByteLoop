@@ -19,7 +19,7 @@ final ThemeData darkTheme = ThemeData(
   ),
   navigationBarTheme: NavigationBarThemeData(
     labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-    height: 72,
+    height: 62,
     indicatorColor: Colors.transparent,
     backgroundColor: AppColors.bgColor,
     iconTheme: WidgetStateProperty.all<IconThemeData>(

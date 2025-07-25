@@ -1,5 +1,6 @@
 import 'package:byteloop/constant/app_colors.dart';
 import 'package:byteloop/model/query_model.dart';
+import 'package:byteloop/routes/route_names.dart';
 import 'package:byteloop/utils/helper.dart';
 import 'package:byteloop/views/widgets/nav_bar/common_widget/video_player_widget.dart';
 import 'package:byteloop/views/widgets/nav_bar/profile/custom_circle_avatar.dart';
@@ -33,7 +34,7 @@ class QueryCard extends StatelessWidget {
                   children: [
                     _buildQueryHeaderSection(),
                     _buildTextQuerySection(),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 12),
                     if (query.assets != null) _buildMediaPreview(context),
 
                     _buildLikeCommentShareToggleSection(),
@@ -83,7 +84,8 @@ class QueryCard extends StatelessWidget {
           icon: const Icon(Iconsax.heart_copy, weight: 24),
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: () =>
+              Get.toNamed(RouteNames.addReplayScreen, arguments: query),
           icon: const Icon(Iconsax.message_2_copy, weight: 24),
         ),
         IconButton(

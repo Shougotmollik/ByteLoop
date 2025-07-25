@@ -42,18 +42,24 @@ class _AddQueryScreenState extends State<AddQueryScreen> {
                       ),
                       Obx(
                         () => IconButton(
-                          onPressed: () {
-                            if (queryController.content.value.isNotEmpty) {
-                              queryController.store(
-                                supabaseService.currentUser.value!.id,
-                              );
-                            }
-                          },
+                          onPressed: queryController.loading.value
+                              ? null // disable button when loading
+                              : () {
+                                  if (queryController
+                                      .content
+                                      .value
+                                      .isNotEmpty) {
+                                    queryController.store(
+                                      supabaseService.currentUser.value!.id,
+                                    );
+                                  }
+                                },
                           icon: queryController.loading.value
                               ? const SizedBox(
                                   height: 20,
                                   width: 20,
                                   child: CircularProgressIndicator(
+                                    strokeWidth: 2,
                                     color: AppColors.purpleBgColor,
                                   ),
                                 )

@@ -7,4 +7,5 @@ class RouteNames {
   static String mainNavBarScreen = '/mainNavBarScreen';
   static String editProfileScreen = '/editProfileScreen';
   static String settingsScreens = '/settingsScreens';
+  static String addReplayScreen = '/addReplayScreen';
 }

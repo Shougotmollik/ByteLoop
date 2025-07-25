@@ -19,30 +19,32 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: const CustomAppBar(),
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.transparent,
       body: CustomRadialBackground(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: CustomScrollView(
-            slivers: [
-              const CustomAppBar(),
-              SliverToBoxAdapter(
-                child: Obx(
-                  () => homeController.loading.value
-                      ? const CustomCircularProgressIndicator()
-                      : ListView.builder(
-                          itemCount: homeController.queries.length,
-                          shrinkWrap: true,
-                          padding: EdgeInsets.zero,
-                          physics: const BouncingScrollPhysics(),
-                          itemBuilder: (context, index) =>
-                              QueryCard(query: homeController.queries[index]),
-                        ),
+          child: RefreshIndicator(
+            onRefresh: () => homeController.fetchQuery(),
+            child: CustomScrollView(
+              slivers: [
+                const CustomAppBar(),
+                SliverToBoxAdapter(
+                  child: Obx(
+                    () => homeController.loading.value
+                        ? const CustomCircularProgressIndicator()
+                        : ListView.builder(
+                            itemCount: homeController.queries.length,
+                            shrinkWrap: true,
+                            padding: EdgeInsets.zero,
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (context, index) =>
+                                QueryCard(query: homeController.queries[index]),
+                          ),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
