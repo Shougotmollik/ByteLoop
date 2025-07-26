@@ -1,3 +1,4 @@
+import 'package:byteloop/model/comment_model.dart';
 import 'package:byteloop/services/supabase_service.dart';
 import 'package:byteloop/utils/helper.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,6 +7,7 @@ import 'package:get/get.dart';
 class ReplyController extends GetxController {
   var loading = false.obs;
   var reply = ''.obs;
+  var replies = <CommentModel>[].obs;
   final TextEditingController replyTEController = TextEditingController();
 
   @override
@@ -39,10 +41,38 @@ class ReplyController extends GetxController {
       });
       Get.back();
       loading.value = false;
+      replyTEController.clear();
       showSnackBar('Success', "Replied successfully!");
+      await fetchReplies(postId);
     } catch (e) {
       loading.value = false;
       showSnackBar('Failed', "Something went wrong");
+    }
+  }
+
+  Future<void> fetchReplies(int postId) async {
+    try {
+      final response = await SupabaseService.client
+          .from('comments')
+          .select('''
+            id,
+            post_id,
+            user_id,
+            reply,
+            created_at,
+            users:user_id (
+              id,
+              metadata
+            )
+          ''')
+          .eq('post_id', postId)
+          .order('created_at', ascending: false);
+
+      replies.value = (response as List)
+          .map((e) => CommentModel.fromJson(e))
+          .toList();
+    } catch (e) {
+      showSnackBar('Error', 'Failed to load replies');
     }
   }
 }

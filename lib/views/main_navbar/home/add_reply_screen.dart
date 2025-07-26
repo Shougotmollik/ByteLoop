@@ -4,6 +4,7 @@ import 'package:byteloop/services/supabase_service.dart';
 import 'package:byteloop/utils/helper.dart';
 import 'package:byteloop/views/widgets/nav_bar/common_widget/custom_circular_progress_indicator.dart';
 import 'package:byteloop/views/widgets/nav_bar/common_widget/custom_radial_background.dart';
+import 'package:byteloop/views/widgets/nav_bar/common_widget/reply_list_widget.dart';
 import 'package:byteloop/views/widgets/nav_bar/common_widget/video_player_widget.dart';
 import 'package:byteloop/views/widgets/nav_bar/profile/custom_circle_avatar.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,7 @@ class _AddReplyScreenState extends State<AddReplyScreen> {
     replyController = Get.find<ReplyController>();
     query = Get.arguments;
     supabaseService = Get.find<SupabaseService>();
+    replyController.fetchReplies(query.id!);
   }
 
   @override
@@ -69,6 +71,7 @@ class _AddReplyScreenState extends State<AddReplyScreen> {
                     ),
                   ],
                 ),
+                ReplyListWidget(postId: query.id!),
               ],
             ),
           ),

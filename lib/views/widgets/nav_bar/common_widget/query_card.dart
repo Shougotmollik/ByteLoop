@@ -7,6 +7,7 @@ import 'package:byteloop/views/widgets/nav_bar/profile/custom_circle_avatar.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class QueryCard extends StatelessWidget {
   final QueryModel query;
@@ -67,10 +68,14 @@ class QueryCard extends StatelessWidget {
           style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
         ),
 
-        const Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           spacing: 6,
-          children: [Text('12 hour ago'), Icon(Icons.more_horiz)],
+          children: [
+            Text(timeago.format(DateTime.parse(query.createdAt!))),
+            const Icon(Icons.more_horiz),
+          ],
         ),
       ],
     );
