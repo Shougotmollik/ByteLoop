@@ -16,38 +16,45 @@ class Routes {
       name: RouteNames.splashScreen,
       page: () => const SplashScreen(),
       transition: Transition.noTransition,
+      binding: ControllerBinder(),
     ),
     GetPage(
       name: RouteNames.loginScreen,
       page: () => const LoginScreen(),
       transition: Transition.rightToLeft,
+      binding: ControllerBinder(),
     ),
     GetPage(
       name: RouteNames.registerScreen,
       page: () => const RegisterScreen(),
       transition: Transition.rightToLeft,
+      binding: ControllerBinder(),
     ),
 
     GetPage(
       name: RouteNames.welcomeScreen,
       page: () => const WelcomeScreen(),
       transition: Transition.fade,
+      binding: ControllerBinder(),
     ),
 
     GetPage(
       name: RouteNames.mainNavBarScreen,
       page: () => const MainNavBarScreen(),
       transition: Transition.fadeIn,
+      binding: ControllerBinder(),
     ),
     GetPage(
       name: RouteNames.editProfileScreen,
       page: () => const EditProfileScreen(),
       transition: Transition.leftToRight,
+      binding: ControllerBinder(),
     ),
     GetPage(
       name: RouteNames.settingsScreens,
       page: () => const SettingsScreen(),
       transition: Transition.rightToLeftWithFade,
+      binding: ControllerBinder(),
     ),
 
     GetPage(

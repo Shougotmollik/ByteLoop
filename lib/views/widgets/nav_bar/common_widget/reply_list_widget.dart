@@ -32,7 +32,7 @@ class ReplyListWidget extends StatelessWidget {
         itemBuilder: (context, index) {
           final reply = replyController.replies[index];
           return Container(
-            margin: const EdgeInsets.symmetric(vertical: 6),
+            margin: const EdgeInsets.symmetric(vertical: 12),
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: AppColors.authBgColor,

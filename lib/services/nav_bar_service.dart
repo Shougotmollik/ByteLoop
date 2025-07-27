@@ -1,3 +1,4 @@
+import 'package:byteloop/routes/route_names.dart';
 import 'package:byteloop/views/main_navbar/home/home_screen.dart';
 import 'package:byteloop/views/main_navbar/query/add_query_screen.dart';
 
@@ -27,5 +28,13 @@ class NavBarService extends GetxService {
   //   Back to previous screen
   void backToPreviousScreen() {
     currentIndex.value = previousIndex.value;
+  }
+
+  //   Back to home Screen
+  void backToHomeScreenAndClearStack() {
+    Get.offAllNamed(
+      RouteNames.mainNavBarScreen,
+    ); // this clears all previous routes
+    currentIndex.value = 0;
   }
 }
