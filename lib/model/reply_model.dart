@@ -1,4 +1,4 @@
-class CommentModel {
+class ReplyModel {
   final int id;
   final int postId;
   final String userId;
@@ -7,7 +7,7 @@ class CommentModel {
   final String? username;
   final DateTime createdAt;
 
-  CommentModel({
+  ReplyModel({
     required this.id,
     required this.postId,
     required this.userId,
@@ -17,11 +17,11 @@ class CommentModel {
     required this.createdAt,
   });
 
-  factory CommentModel.fromJson(Map<String, dynamic> json) {
+  factory ReplyModel.fromJson(Map<String, dynamic> json) {
     final userData = json['users'] ?? {};
     final metadata = userData['metadata'] ?? {};
 
-    return CommentModel(
+    return ReplyModel(
       id: json['id'],
       postId: json['post_id'],
       userId: json['user_id'],

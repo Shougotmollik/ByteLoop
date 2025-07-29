@@ -1,4 +1,4 @@
-import 'package:byteloop/model/comment_model.dart';
+import 'package:byteloop/model/reply_model.dart';
 import 'package:byteloop/services/supabase_service.dart';
 import 'package:byteloop/utils/helper.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 class ReplyController extends GetxController {
   var loading = false.obs;
   var reply = ''.obs;
-  var replies = <CommentModel>[].obs;
+  var replies = <ReplyModel>[].obs;
   final TextEditingController replyTEController = TextEditingController();
 
   @override
@@ -69,7 +69,7 @@ class ReplyController extends GetxController {
           .order('created_at', ascending: false);
 
       replies.value = (response as List)
-          .map((e) => CommentModel.fromJson(e))
+          .map((e) => ReplyModel.fromJson(e))
           .toList();
     } catch (e) {
       showSnackBar('Error', 'Failed to load replies');

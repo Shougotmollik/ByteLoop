@@ -1,14 +1,13 @@
-import 'package:byteloop/constant/app_colors.dart';
 import 'package:byteloop/controllers/reply_controller.dart';
 import 'package:byteloop/views/widgets/nav_bar/profile/custom_circle_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-class ReplyListWidget extends StatelessWidget {
+class ReplyCard extends StatelessWidget {
   final int postId;
 
-  ReplyListWidget({super.key, required this.postId});
+  ReplyCard({super.key, required this.postId});
 
   final ReplyController replyController = Get.find<ReplyController>();
 
@@ -31,17 +30,12 @@ class ReplyListWidget extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           final reply = replyController.replies[index];
-          return Container(
-            margin: const EdgeInsets.symmetric(vertical: 12),
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: AppColors.authBgColor,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
                   spacing: 12,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -75,9 +69,9 @@ class ReplyListWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 8),
-              ],
-            ),
+              ),
+              const Divider(color: Color(0xff242424)),
+            ],
           );
         },
       );

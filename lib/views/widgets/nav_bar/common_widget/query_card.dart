@@ -23,24 +23,36 @@ class QueryCard extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                width: context.width * 0.12,
-                child: CustomCircleAvatar(url: query.user?.metadata?.image),
+              InkWell(
+                onTap: () => Get.toNamed(
+                  RouteNames.profileScreen,
+                  arguments: query.user,
+                ),
+                child: SizedBox(
+                  width: context.width * 0.12,
+                  child: CustomCircleAvatar(url: query.user?.metadata?.image),
+                ),
               ),
               const SizedBox(width: 10),
               SizedBox(
                 width: context.width * 0.80,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildQueryHeaderSection(),
-                    _buildTextQuerySection(),
-                    const SizedBox(height: 12),
-                    if (query.assets != null) _buildMediaPreview(context),
+                child: InkWell(
+                  onTap: () => Get.toNamed(
+                    RouteNames.showQueryScreen,
+                    arguments: query.id,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildQueryHeaderSection(),
+                      _buildTextQuerySection(),
+                      const SizedBox(height: 12),
+                      if (query.assets != null) _buildMediaPreview(context),
 
-                    _buildLikeCommentShareToggleSection(),
-                    _buildCommentLikeCountSection(),
-                  ],
+                      _buildLikeCommentShareToggleSection(),
+                      _buildCommentLikeCountSection(),
+                    ],
+                  ),
                 ),
               ),
             ],

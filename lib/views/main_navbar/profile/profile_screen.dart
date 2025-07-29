@@ -2,8 +2,12 @@ import 'package:byteloop/controllers/profile_controller.dart';
 import 'package:byteloop/routes/route_names.dart';
 import 'package:byteloop/services/supabase_service.dart';
 import 'package:byteloop/utils/styles/button_styles.dart';
+import 'package:byteloop/views/widgets/nav_bar/common_widget/custom_circular_progress_indicator.dart';
 import 'package:byteloop/views/widgets/nav_bar/common_widget/custom_radial_background.dart';
+import 'package:byteloop/views/widgets/nav_bar/common_widget/query_card.dart';
 import 'package:byteloop/views/widgets/nav_bar/profile/custom_circle_avatar.dart';
+import 'package:byteloop/views/widgets/nav_bar/profile/sliver_app_delegate.dart';
+import 'package:byteloop/views/widgets/nav_bar/profile/user_reply_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +21,15 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   final ProfileController profileController = Get.find<ProfileController>();
   final SupabaseService supabaseService = Get.find<SupabaseService>();
+
+  @override
+  void initState() {
+    super.initState();
+    if (supabaseService.currentUser.value?.id != null) {
+      profileController.fetchUserQuery(supabaseService.currentUser.value!.id);
+      profileController.fetchUserReplies(supabaseService.currentUser.value!.id);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,74 +56,80 @@ class _ProfileScreenState extends State<ProfileScreen> {
               return <Widget>[
                 SliverAppBar(
                   expandedHeight: 160,
-                  collapsedHeight: 160,
+                  collapsedHeight: 80,
                   automaticallyImplyLeading: false,
-                  flexibleSpace: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                    child: Column(
-                      children: [
-                        Obx(
-                          () => Row(
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: Column(
+                        children: [
+                          Obx(
+                            () => Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      supabaseService
+                                          .currentUser
+                                          .value!
+                                          .userMetadata?['name'],
+                                      style: const TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: context.width * 0.60,
+                                      child: Text(
+                                        supabaseService
+                                                .currentUser
+                                                .value!
+                                                .userMetadata?["description"] ??
+                                            "Welcome to byteLoop🙂.Add your description📋",
+                                        style: const TextStyle(
+                                          color: Colors.white60,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                CustomCircleAvatar(
+                                  radius: 48,
+                                  url: supabaseService
+                                      .currentUser
+                                      .value
+                                      ?.userMetadata?['image'],
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    supabaseService
-                                        .currentUser
-                                        .value!
-                                        .userMetadata?['name'],
-                                    style: const TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: context.width * 0.60,
-                                    child: Text(
-                                      supabaseService
-                                              .currentUser
-                                              .value!
-                                              .userMetadata?["description"] ??
-                                          "Welcome to byteLoop🙂.Add your description📋",
-                                    ),
-                                  ),
-                                ],
+                              Expanded(
+                                child: OutlinedButton(
+                                  style: customOutlineStyle(),
+                                  onPressed: () {
+                                    Get.toNamed(RouteNames.editProfileScreen);
+                                  },
+                                  child: const Text('Edit Profile'),
+                                ),
                               ),
-                              CustomCircleAvatar(
-                                radius: 48,
-                                url: supabaseService
-                                    .currentUser
-                                    .value
-                                    ?.userMetadata?['image'],
+                              const SizedBox(width: 20),
+                              Expanded(
+                                child: OutlinedButton(
+                                  style: customOutlineStyle(),
+                                  onPressed: () {},
+                                  child: const Text('Share Profile'),
+                                ),
                               ),
                             ],
                           ),
-                        ),
-                        const SizedBox(height: 12),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: OutlinedButton(
-                                style: customOutlineStyle(),
-                                onPressed: () {
-                                  Get.toNamed(RouteNames.editProfileScreen);
-                                },
-                                child: const Text('Edit Profile'),
-                              ),
-                            ),
-                            const SizedBox(width: 20),
-                            Expanded(
-                              child: OutlinedButton(
-                                style: customOutlineStyle(),
-                                onPressed: () {},
-                                child: const Text('Share Profile'),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -131,10 +150,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ];
             },
-            body: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 18.0),
+            body: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 0),
               child: TabBarView(
-                children: [Text('I am Queries'), Text('I am Replies')],
+                children: [_buildQuerySection(), _buildReplySection()],
               ),
             ),
           ),
@@ -142,31 +161,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
-}
 
-// * Sliver Persistent Header Class
-class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  final TabBar _tabBar;
-
-  SliverAppBarDelegate(this._tabBar);
-
-  @override
-  double get maxExtent => _tabBar.preferredSize.height;
-
-  @override
-  double get minExtent => _tabBar.preferredSize.height;
-
-  @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    return Container(color: Colors.transparent, child: _tabBar);
+  Widget _buildQuerySection() {
+    return Obx(
+      () => profileController.queryLoading.value
+          ? const CustomCircularProgressIndicator()
+          : profileController.queries.isEmpty
+          ? const Center(child: Text("No queries found"))
+          : ListView.builder(
+              padding: const EdgeInsets.only(top: 10),
+              itemCount: profileController.queries.length,
+              itemBuilder: (context, index) {
+                return QueryCard(query: profileController.queries[index]);
+              },
+            ),
+    );
   }
 
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-    return false;
+  Widget _buildReplySection() {
+    return Obx(
+      () => profileController.replyLoading.value
+          ? const CustomCircularProgressIndicator()
+          : profileController.replies.isEmpty
+          ? const Center(child: Text("No repiles found"))
+          : ListView.builder(
+              padding: const EdgeInsets.only(top: 10),
+              itemCount: profileController.replies.length,
+              shrinkWrap: true,
+              physics: const BouncingScrollPhysics(),
+              itemBuilder: (context, index) {
+                return UserReplyCard(
+                  userReply: profileController.replies[index],
+                );
+              },
+            ),
+    );
   }
 }

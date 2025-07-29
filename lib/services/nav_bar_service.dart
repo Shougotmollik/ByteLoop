@@ -12,12 +12,12 @@ class NavBarService extends GetxService {
   var currentIndex = 0.obs;
   var previousIndex = 0.obs;
 
-  final List<Widget> screens = const [
-    HomeScreen(),
-    SearchScreen(),
-    AddQueryScreen(),
-    NotificationScreen(),
-    ProfileScreen(),
+  final List<Widget> screens = [
+    const HomeScreen(),
+    const SearchScreen(),
+    const AddQueryScreen(),
+    const NotificationScreen(),
+    const ProfileScreen(),
   ];
 
   void updateIndex(int index) {

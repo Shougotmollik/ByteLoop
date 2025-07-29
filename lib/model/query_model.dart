@@ -9,7 +9,7 @@ class QueryModel {
   int? likeCount;
   String? userId;
   String? type; // <-- add this
-  User? user;
+  UserModel? user;
 
   QueryModel({
     this.id,
@@ -32,7 +32,7 @@ class QueryModel {
     likeCount = json['like_count'];
     userId = json['user_id'];
     type = json['type']; // <-- parse it
-    user = json['user'] != null ? User.fromJson(json['user']) : null;
+    user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {

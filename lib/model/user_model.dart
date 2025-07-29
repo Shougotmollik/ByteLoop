@@ -1,10 +1,10 @@
-class User {
+class UserModel {
   String? email;
   Metadata? metadata;
 
-  User({this.email, this.metadata});
+  UserModel({this.email, this.metadata});
 
-  User.fromJson(Map<String, dynamic> json) {
+  UserModel.fromJson(Map<String, dynamic> json) {
     email = json['email'];
     metadata = json['metadata'] != null
         ? Metadata.fromJson(json['metadata'])

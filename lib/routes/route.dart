@@ -7,6 +7,8 @@ import 'package:byteloop/views/auth/welcome_screen.dart';
 import 'package:byteloop/views/main_navbar/home/add_reply_screen.dart';
 import 'package:byteloop/views/main_navbar/main_nav_bar_screen.dart';
 import 'package:byteloop/views/main_navbar/profile/edit_profile_screen.dart';
+import 'package:byteloop/views/main_navbar/profile/profile_screen.dart';
+import 'package:byteloop/views/main_navbar/query/show_query_screen.dart';
 import 'package:byteloop/views/main_navbar/settings/settings_screen.dart';
 import 'package:get/get.dart';
 
@@ -45,6 +47,12 @@ class Routes {
       binding: ControllerBinder(),
     ),
     GetPage(
+      name: RouteNames.profileScreen,
+      page: () => const ProfileScreen(),
+      transition: Transition.fadeIn,
+      binding: ControllerBinder(),
+    ),
+    GetPage(
       name: RouteNames.editProfileScreen,
       page: () => const EditProfileScreen(),
       transition: Transition.leftToRight,
@@ -60,6 +68,12 @@ class Routes {
     GetPage(
       name: RouteNames.addReplayScreen,
       page: () => const AddReplyScreen(),
+      transition: Transition.downToUp,
+      binding: ControllerBinder(),
+    ),
+    GetPage(
+      name: RouteNames.showQueryScreen,
+      page: () => const ShowQueryScreen(),
       transition: Transition.downToUp,
       binding: ControllerBinder(),
     ),

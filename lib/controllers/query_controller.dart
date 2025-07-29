@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:byteloop/model/query_model.dart';
+import 'package:byteloop/model/user_reply_model.dart';
 import 'package:byteloop/services/nav_bar_service.dart';
 import 'package:byteloop/services/supabase_service.dart';
 import 'package:byteloop/utils/env.dart';
@@ -15,6 +17,10 @@ class QueryController extends GetxController {
   var loading = false.obs;
   var isUploading = false.obs;
   var isPicking = false.obs;
+  var showQueryLoading = false.obs;
+  Rx<QueryModel> queries = Rx<QueryModel>(QueryModel());
+  var showReplyLoading = false.obs;
+  RxList<UserReplyModel> replies = RxList<UserReplyModel>();
 
   Rx<File?> image = Rx<File?>(null);
   Rx<File?> video = Rx<File?>(null);
@@ -124,6 +130,55 @@ class QueryController extends GetxController {
     } finally {
       loading.value = false;
       isUploading.value = false;
+    }
+  }
+
+  // To show query
+  void showQuery(int postId) async {
+    try {
+      queries.value = QueryModel();
+      replies.value = [];
+      showQueryLoading.value = true;
+      final response = await SupabaseService.client
+          .from('posts')
+          .select('''
+      id,content,assets,type,created_at,comment_count,like_count,user_id,
+      user:user_id(email,metadata)
+      ''')
+          .eq('id', postId)
+          .single();
+      showQueryLoading.value = false;
+      queries.value = QueryModel.fromJson(response);
+      fetchReply(postId);
+    } catch (e) {
+      showSnackBar('Failed', 'Somethings went wrong');
+    } finally {
+      showQueryLoading.value = false;
+    }
+  }
+
+  // Fetch repiles
+  void fetchReply(int postId) async {
+    try {
+      showReplyLoading.value = true;
+      final List<dynamic> response = await SupabaseService.client
+          .from("comments")
+          .select('''
+      user_id,post_id,reply,created_at,user:user_id(email,metadata)
+      ''')
+          .eq("post_id", postId)
+          .order("id", ascending: false);
+      showReplyLoading.value = false;
+      if (response.isNotEmpty) {
+        replies.value = [
+          for (var item in response) UserReplyModel.fromJson(item),
+        ];
+      }
+    } catch (error) {
+      showReplyLoading.value = false;
+      showSnackBar('Failed!', 'Something went wrong');
+    } finally {
+      showReplyLoading.value = false;
     }
   }
 
