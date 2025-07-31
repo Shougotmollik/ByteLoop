@@ -23,36 +23,24 @@ class QueryCard extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              InkWell(
-                onTap: () => Get.toNamed(
-                  RouteNames.profileScreen,
-                  arguments: query.user,
-                ),
-                child: SizedBox(
-                  width: context.width * 0.12,
-                  child: CustomCircleAvatar(url: query.user?.metadata?.image),
-                ),
+              SizedBox(
+                width: context.width * 0.12,
+                child: CustomCircleAvatar(url: query.user?.metadata?.image),
               ),
               const SizedBox(width: 10),
               SizedBox(
                 width: context.width * 0.80,
-                child: InkWell(
-                  onTap: () => Get.toNamed(
-                    RouteNames.showQueryScreen,
-                    arguments: query.id,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildQueryHeaderSection(),
-                      _buildTextQuerySection(),
-                      const SizedBox(height: 12),
-                      if (query.assets != null) _buildMediaPreview(context),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildQueryHeaderSection(),
+                    _buildTextQuerySection(),
+                    const SizedBox(height: 12),
+                    if (query.assets != null) _buildMediaPreview(context),
 
-                      _buildLikeCommentShareToggleSection(),
-                      _buildCommentLikeCountSection(),
-                    ],
-                  ),
+                    _buildLikeCommentShareToggleSection(),
+                    _buildCommentLikeCountSection(),
+                  ],
                 ),
               ),
             ],
@@ -64,9 +52,12 @@ class QueryCard extends StatelessWidget {
   }
 
   Widget _buildTextQuerySection() {
-    return Text(
-      query.content!,
-      style: const TextStyle(fontSize: 14, color: Colors.white70),
+    return InkWell(
+      onTap: () => Get.toNamed(RouteNames.showQueryScreen, arguments: query.id),
+      child: Text(
+        query.content!,
+        style: const TextStyle(fontSize: 14, color: Colors.white70),
+      ),
     );
   }
 
@@ -138,20 +129,23 @@ class QueryCard extends StatelessWidget {
   }
 
   Widget _buildMediaPreview(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(
-        maxHeight: context.height * 0.60,
-        maxWidth: context.width * 0.80,
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadiusGeometry.circular(8.0),
-        child: query.type == 'video'
-            ? VideoPlayerWidget(url: getS3Url(query.assets!))
-            : Image.network(
-                getS3Url(query.assets!),
-                fit: BoxFit.cover,
-                alignment: Alignment.topCenter,
-              ),
+    return InkWell(
+      onTap: () => Get.toNamed(RouteNames.showAssets, arguments: query.assets),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxHeight: context.height * 0.60,
+          maxWidth: context.width * 0.80,
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(8.0),
+          child: query.type == 'video'
+              ? VideoPlayerWidget(url: getS3Url(query.assets!))
+              : Image.network(
+                  getS3Url(query.assets!),
+                  fit: BoxFit.cover,
+                  alignment: Alignment.topCenter,
+                ),
+        ),
       ),
     );
   }

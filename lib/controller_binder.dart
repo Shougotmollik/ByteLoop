@@ -4,6 +4,7 @@ import 'package:byteloop/controllers/notification_controller.dart';
 import 'package:byteloop/controllers/profile_controller.dart';
 import 'package:byteloop/controllers/query_controller.dart';
 import 'package:byteloop/controllers/reply_controller.dart';
+import 'package:byteloop/controllers/search_user_controller.dart';
 import 'package:byteloop/controllers/settings_controller.dart';
 import 'package:byteloop/services/nav_bar_service.dart';
 import 'package:byteloop/services/supabase_service.dart';
@@ -19,6 +20,7 @@ class ControllerBinder extends Bindings {
     Get.lazyPut<QueryController>(() => QueryController());
     Get.lazyPut<ReplyController>(() => ReplyController());
     Get.lazyPut<NotificationController>(() => NotificationController());
+    Get.lazyPut<SearchUserController>(() => SearchUserController());
 
     //   Service bindings
     Get.lazyPut<SupabaseService>(() => SupabaseService());

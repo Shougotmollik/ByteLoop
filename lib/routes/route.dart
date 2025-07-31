@@ -8,6 +8,7 @@ import 'package:byteloop/views/main_navbar/home/add_reply_screen.dart';
 import 'package:byteloop/views/main_navbar/main_nav_bar_screen.dart';
 import 'package:byteloop/views/main_navbar/profile/edit_profile_screen.dart';
 import 'package:byteloop/views/main_navbar/profile/profile_screen.dart';
+import 'package:byteloop/views/main_navbar/query/show_asset.dart';
 import 'package:byteloop/views/main_navbar/query/show_query_screen.dart';
 import 'package:byteloop/views/main_navbar/settings/settings_screen.dart';
 import 'package:get/get.dart';
@@ -75,6 +76,12 @@ class Routes {
       name: RouteNames.showQueryScreen,
       page: () => const ShowQueryScreen(),
       transition: Transition.downToUp,
+      binding: ControllerBinder(),
+    ),
+    GetPage(
+      name: RouteNames.showAssets,
+      page: () =>  ShowAsset(),
+      transition: Transition.fadeIn,
       binding: ControllerBinder(),
     ),
   ];
