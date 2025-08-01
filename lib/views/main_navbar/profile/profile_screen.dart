@@ -190,8 +190,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
               shrinkWrap: true,
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) {
-                return UserReplyCard(
-                  userReply: profileController.replies[index],
+                return InkWell(
+                  onTap: () {
+                    Get.toNamed(
+                      RouteNames.showQueryScreen,
+                      arguments: profileController.replies[index].postId,
+                    );
+                  },
+                  child: UserReplyCard(
+                    userReply: profileController.replies[index],
+                  ),
                 );
               },
             ),

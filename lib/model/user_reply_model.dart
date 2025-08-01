@@ -6,6 +6,7 @@ class UserReplyModel {
   String? createdAt;
   String? userId;
   UserModel? user;
+  int? postId;
 
   UserReplyModel({this.id, this.reply, this.createdAt, this.userId, this.user});
 
@@ -14,6 +15,7 @@ class UserReplyModel {
     reply = json['reply'];
     createdAt = json['created_at'];
     userId = json['user_id'];
+    postId = json['post_id'];
     user = json['user'] != null ? UserModel.fromJson(json['user']) : null;
   }
 
@@ -23,6 +25,7 @@ class UserReplyModel {
     data['reply'] = reply;
     data['created_at'] = createdAt;
     data['user_id'] = userId;
+    data['post_id'] = postId;
     if (user != null) {
       data['user'] = user!.toJson();
     }

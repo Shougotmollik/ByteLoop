@@ -21,20 +21,27 @@ class _QueryCardBottomBarState extends State<QueryCardBottomBar> {
   final QueryController controller = Get.find<QueryController>();
   final SupabaseService supabaseService = Get.find<SupabaseService>();
 
-  //** Like dislike function
   void likeDislike(String status) async {
     setState(() {
       likeStatus = status;
     });
+
+    // Reset local likes when unliking
     if (likeStatus == "0") {
       widget.query.likes = [];
     }
-    await controller.likeDislike(
-      status,
-      widget.query.id!,
-      widget.query.userId!,
-      supabaseService.currentUser.value!.id,
-    );
+
+    final currentUserId = supabaseService.currentUser.value?.id;
+    if (widget.query.id != null &&
+        widget.query.userId != null &&
+        currentUserId != null) {
+      await controller.likeDislike(
+        status,
+        widget.query.id!,
+        widget.query.userId!,
+        currentUserId,
+      );
+    }
   }
 
   @override
@@ -43,7 +50,7 @@ class _QueryCardBottomBarState extends State<QueryCardBottomBar> {
       children: [
         Row(
           children: [
-            likeStatus == '1' || widget.query.likes!.isNotEmpty
+            likeStatus == '1' || (widget.query.likes?.isNotEmpty ?? false)
                 ? IconButton(
                     onPressed: () {
                       likeDislike("0");
@@ -73,19 +80,20 @@ class _QueryCardBottomBarState extends State<QueryCardBottomBar> {
             ),
           ],
         ),
+        const SizedBox(height: 4),
         Row(
-          spacing: 8,
           children: [
             Text(
-              "${widget.query.commentCount} replies",
+              "${widget.query.commentCount ?? 0} replies",
               style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
                 color: AppColors.greyColor,
               ),
             ),
+            const SizedBox(width: 8),
             Text(
-              "${widget.query.likeCount} likes",
+              "${widget.query.likeCount ?? 0} likes",
               style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
