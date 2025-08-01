@@ -75,12 +75,12 @@ class Routes {
     GetPage(
       name: RouteNames.showQueryScreen,
       page: () => const ShowQueryScreen(),
-      transition: Transition.downToUp,
+      transition: Transition.fadeIn,
       binding: ControllerBinder(),
     ),
     GetPage(
       name: RouteNames.showAssets,
-      page: () =>  ShowAsset(),
+      page: () => ShowAsset(),
       transition: Transition.fadeIn,
       binding: ControllerBinder(),
     ),

@@ -28,7 +28,7 @@ class ReplyController extends GetxController {
       //   Add notification
       await SupabaseService.client.from('notifications').insert({
         "user_id": userId,
-        "notification": "Have a replies on your query",
+        "notification": "Your query got attention! Read the latest reply",
         "to_user_id": postUserId,
         "post_id": postId,
       });

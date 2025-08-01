@@ -1,4 +1,5 @@
 import 'package:byteloop/controllers/notification_controller.dart';
+import 'package:byteloop/routes/route_names.dart';
 import 'package:byteloop/services/supabase_service.dart';
 import 'package:byteloop/views/widgets/nav_bar/common_widget/custom_circular_progress_indicator.dart';
 import 'package:byteloop/views/widgets/nav_bar/common_widget/custom_radial_background.dart';
@@ -46,6 +47,14 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     physics: const BouncingScrollPhysics(),
                     itemCount: notificationController.notifications.length,
                     itemBuilder: (context, index) => ListTile(
+                      onTap: () {
+                        Get.toNamed(
+                          RouteNames.showQueryScreen,
+                          arguments: notificationController
+                              .notifications[index]
+                              .postId,
+                        );
+                      },
                       leading: CustomCircleAvatar(
                         url: notificationController
                             .notifications[index]

@@ -34,13 +34,15 @@ class ReplyCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 4.0,
+                  vertical: 18.0,
+                ),
                 child: Row(
-                  spacing: 12,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomCircleAvatar(url: reply.userAvatarUrl, radius: 20),
-
+                    const SizedBox(width: 12),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,

@@ -182,6 +182,45 @@ class QueryController extends GetxController {
     }
   }
 
+  // * to like and dislike
+  Future<void> likeDislike(
+    String status,
+    int postId,
+    String postUserId,
+    String userId,
+  ) async {
+    if (status == '1') {
+      await SupabaseService.client.from('likes').insert({
+        "user_id": userId,
+        "post_id": postId,
+      });
+
+      //   Add like notification
+      await SupabaseService.client.from('notifications').insert({
+        "user_id": userId,
+        "notification": "Someone noticed your query and gave it a like",
+        "to_user_id": postUserId,
+        "post_id": postId,
+      });
+      // * Increment the like counter
+      await SupabaseService.client.rpc(
+        "like_increment",
+        params: {"count": 1, "row_id": postId},
+      );
+    } else {
+      //   * Delete entry from likes table
+      await SupabaseService.client.from("likes").delete().match({
+        "user_id": userId,
+        "post_id": postId,
+      });
+      // * Decrement post count
+      await SupabaseService.client.rpc(
+        "like_decrement",
+        params: {"count": 1, "row_id": postId},
+      );
+    }
+  }
+
   // Clear selected media
   void clearMedia() {
     content.value = "";

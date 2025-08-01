@@ -1,12 +1,11 @@
-import 'package:byteloop/constant/app_colors.dart';
 import 'package:byteloop/model/query_model.dart';
 import 'package:byteloop/routes/route_names.dart';
 import 'package:byteloop/utils/helper.dart';
+import 'package:byteloop/views/widgets/nav_bar/common_widget/query_card_bottom_bar.dart';
 import 'package:byteloop/views/widgets/nav_bar/common_widget/video_player_widget.dart';
 import 'package:byteloop/views/widgets/nav_bar/profile/custom_circle_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class QueryCard extends StatelessWidget {
@@ -38,8 +37,7 @@ class QueryCard extends StatelessWidget {
                     const SizedBox(height: 12),
                     if (query.assets != null) _buildMediaPreview(context),
 
-                    _buildLikeCommentShareToggleSection(),
-                    _buildCommentLikeCountSection(),
+                    QueryCardBottomBar(query: query),
                   ],
                 ),
               ),
@@ -79,50 +77,6 @@ class QueryCard extends StatelessWidget {
             Text(timeago.format(DateTime.parse(query.createdAt!))),
             const Icon(Icons.more_horiz),
           ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildLikeCommentShareToggleSection() {
-    return Row(
-      children: [
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Iconsax.heart_copy, weight: 24),
-        ),
-        IconButton(
-          onPressed: () =>
-              Get.toNamed(RouteNames.addReplayScreen, arguments: query),
-          icon: const Icon(Iconsax.message_2_copy, weight: 24),
-        ),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Iconsax.send_2_copy, weight: 24),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildCommentLikeCountSection() {
-    return Row(
-      spacing: 8,
-      children: [
-        Text(
-          "${query.commentCount} replies",
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-            color: AppColors.greyColor,
-          ),
-        ),
-        Text(
-          "${query.likeCount} likes",
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-            color: AppColors.greyColor,
-          ),
         ),
       ],
     );
