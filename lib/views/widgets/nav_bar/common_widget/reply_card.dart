@@ -64,7 +64,7 @@ class ReplyCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const Spacer(),
+
                     Text(
                       timeago.format(reply.createdAt),
                       style: const TextStyle(fontSize: 12, color: Colors.grey),

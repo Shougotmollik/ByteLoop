@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:byteloop/model/query_model.dart';
 import 'package:byteloop/services/supabase_service.dart';
 import 'package:get/get.dart';
@@ -24,7 +22,7 @@ class HomeController extends GetxController {
       user:user_id(email,metadata),likes:likes(user_id,post_id)
       ''')
         .order("id", ascending: false);
-    print('print the query response ==>${jsonEncode(response)}');
+
     loading.value = false;
     if (response.isNotEmpty) {
       queries.value = [for (var item in response) QueryModel.fromJson(item)];

@@ -21,10 +21,8 @@ class _MainNavBarScreenState extends State<MainNavBarScreen> {
       onPopInvokedWithResult: (didPop, result) {
         if (!didPop) {
           if (_navBarService.currentIndex.value != 0) {
-            // If not already on Home, reset to home and clear navigation stack
             _navBarService.backToHomeScreenAndClearStack();
           } else {
-            // Already on Home, show confirmation to exit
             showDialog(
               context: context,
               builder: (_) => AlertDialog(
@@ -51,43 +49,52 @@ class _MainNavBarScreenState extends State<MainNavBarScreen> {
             duration: const Duration(milliseconds: 500),
             switchInCurve: Curves.ease,
             switchOutCurve: Curves.easeInOut,
-
             child: _navBarService.screens[_navBarService.currentIndex.value],
           ),
-
-          bottomNavigationBar: NavigationBar(
-            selectedIndex: _navBarService.currentIndex.value,
-            onDestinationSelected: (value) => _navBarService.updateIndex(value),
-            animationDuration: const Duration(milliseconds: 500),
-
-            destinations: const [
-              NavigationDestination(
-                icon: Icon(Iconsax.home_1_copy),
-                selectedIcon: Icon(Iconsax.home),
-                label: 'home',
+          bottomNavigationBar: Obx(() {
+            return AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              height: _navBarService.isNavBarVisible.value
+                  ? kBottomNavigationBarHeight
+                  : 0,
+              child: Wrap(
+                children: [
+                  NavigationBar(
+                    selectedIndex: _navBarService.currentIndex.value,
+                    onDestinationSelected: _navBarService.updateIndex,
+                    animationDuration: const Duration(milliseconds: 500),
+                    destinations: const [
+                      NavigationDestination(
+                        icon: Icon(Iconsax.home_1_copy),
+                        selectedIcon: Icon(Iconsax.home),
+                        label: 'Home',
+                      ),
+                      NavigationDestination(
+                        icon: Icon(Iconsax.search_normal_1_copy),
+                        selectedIcon: Icon(Iconsax.search_normal_1),
+                        label: 'Search',
+                      ),
+                      NavigationDestination(
+                        icon: Icon(Iconsax.add_square_copy),
+                        selectedIcon: Icon(Iconsax.add_square),
+                        label: 'Query',
+                      ),
+                      NavigationDestination(
+                        icon: Icon(Iconsax.heart_copy),
+                        selectedIcon: Icon(Iconsax.heart),
+                        label: 'Notifications',
+                      ),
+                      NavigationDestination(
+                        icon: Icon(Iconsax.profile_circle_copy),
+                        selectedIcon: Icon(Iconsax.profile_circle),
+                        label: 'Profile',
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              NavigationDestination(
-                icon: Icon(Iconsax.search_normal_1_copy),
-                selectedIcon: Icon(Iconsax.search_normal_1),
-                label: 'Search',
-              ),
-              NavigationDestination(
-                icon: Icon(Iconsax.add_square_copy),
-                selectedIcon: Icon(Iconsax.add_square),
-                label: 'Query',
-              ),
-              NavigationDestination(
-                icon: Icon(Iconsax.heart_copy),
-                selectedIcon: Icon(Iconsax.heart),
-                label: 'home',
-              ),
-              NavigationDestination(
-                icon: Icon(Iconsax.profile_circle_copy),
-                selectedIcon: Icon(Iconsax.profile_circle),
-                label: 'home',
-              ),
-            ],
-          ),
+            );
+          }),
         ),
       ),
     );

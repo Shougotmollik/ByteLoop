@@ -35,7 +35,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
       appBar: _buildAppBar(),
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.transparent,
-
       body: CustomRadialBackground(
         child: SingleChildScrollView(
           child: Obx(

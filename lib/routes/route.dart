@@ -43,7 +43,7 @@ class Routes {
 
     GetPage(
       name: RouteNames.mainNavBarScreen,
-      page: () => const MainNavBarScreen(),
+      page: () => MainNavBarScreen(),
       transition: Transition.fadeIn,
       binding: ControllerBinder(),
     ),
