@@ -11,4 +11,5 @@ class RouteNames {
   static String addReplayScreen = '/addReplayScreen';
   static String showQueryScreen = '/showQueryScreen';
   static String showAssets = '/showAssets';
+  static String showUserProfile = '/showUserProfile';
 }

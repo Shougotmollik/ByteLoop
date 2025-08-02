@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:byteloop/model/query_model.dart';
+import 'package:byteloop/model/user_model.dart';
 import 'package:byteloop/model/user_reply_model.dart';
 import 'package:byteloop/services/supabase_service.dart';
 import 'package:byteloop/utils/env.dart';
@@ -18,6 +19,9 @@ class ProfileController extends GetxController {
 
   var replyLoading = false.obs;
   RxList<UserReplyModel> replies = RxList<UserReplyModel>();
+
+  var userLoading = false.obs;
+  Rx<UserModel> user = Rx<UserModel>(UserModel());
 
   // * pick the image
   Future<void> pickImage() async {
@@ -116,6 +120,26 @@ class ProfileController extends GetxController {
     } catch (e) {
       replyLoading.value = false;
       showSnackBar('Failed', 'Somethings went wrong');
+    }
+  }
+
+  //* Fetch user Profile
+  void fetchUserProfile(String userId) async {
+    try {
+      userLoading.value = true;
+      final response = await SupabaseService.client
+          .from("users")
+          .select("*")
+          .eq("id", userId)
+          .single();
+      userLoading.value = false;
+      user.value = UserModel.fromJson(response);
+      //   fetch user query and replies
+      fetchUserQuery(userId);
+      fetchUserReplies(userId);
+    } catch (e) {
+      userLoading.value = false;
+      showSnackBar('Failed', 'Something went wrong');
     }
   }
 }

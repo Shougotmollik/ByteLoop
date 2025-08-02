@@ -31,10 +31,12 @@ class NavBarService extends GetxService {
   }
 
   void _scrollListener() {
-    if (scrollController.position.userScrollDirection == ScrollDirection.reverse) {
+    if (scrollController.position.userScrollDirection ==
+        ScrollDirection.reverse) {
       isNavBarVisible.value = false;
       isAppBarVisible.value = false;
-    } else if (scrollController.position.userScrollDirection == ScrollDirection.forward) {
+    } else if (scrollController.position.userScrollDirection ==
+        ScrollDirection.forward) {
       isNavBarVisible.value = true;
       isAppBarVisible.value = true;
     }
@@ -52,5 +54,9 @@ class NavBarService extends GetxService {
   void backToHomeScreenAndClearStack() {
     Get.offAllNamed(RouteNames.mainNavBarScreen);
     currentIndex.value = 0;
+  }
+
+  void backToProfileScreen() {
+    currentIndex.value = 4;
   }
 }
