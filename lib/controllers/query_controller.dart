@@ -143,7 +143,7 @@ class QueryController extends GetxController {
           .from('posts')
           .select('''
       id,content,assets,type,created_at,comment_count,like_count,user_id,
-      user:user_id(email,metadata)
+      user:user_id(email,metadata),likes(user_id,post_id)
       ''')
           .eq('id', postId)
           .single();
