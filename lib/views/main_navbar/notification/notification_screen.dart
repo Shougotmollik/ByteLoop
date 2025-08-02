@@ -1,5 +1,6 @@
 import 'package:byteloop/controllers/notification_controller.dart';
 import 'package:byteloop/routes/route_names.dart';
+import 'package:byteloop/services/nav_bar_service.dart';
 import 'package:byteloop/services/supabase_service.dart';
 import 'package:byteloop/views/widgets/nav_bar/common_widget/custom_circular_progress_indicator.dart';
 import 'package:byteloop/views/widgets/nav_bar/common_widget/custom_radial_background.dart';
@@ -19,6 +20,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
   final NotificationController notificationController =
       Get.find<NotificationController>();
   final SupabaseService supabaseService = Get.find<SupabaseService>();
+  final NavBarService navBarService = Get.find<NavBarService>();
 
   @override
   void initState() {
@@ -37,6 +39,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
       backgroundColor: Colors.transparent,
       body: CustomRadialBackground(
         child: SingleChildScrollView(
+          controller: navBarService.scrollController,
           child: Obx(
             () => notificationController.loading.value
                 ? const CustomCircularProgressIndicator()

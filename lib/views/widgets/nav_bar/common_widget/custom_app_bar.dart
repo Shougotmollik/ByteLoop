@@ -12,16 +12,22 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Obx(() {
       return AnimatedContainer(
         duration: const Duration(milliseconds: 300),
-        height: navBarService.isAppBarVisible.value ? 76 : 0,
+        height: navBarService.isAppBarVisible.value ? 76 : 52,
         child: AnimatedOpacity(
           duration: const Duration(milliseconds: 300),
-          opacity: navBarService.isAppBarVisible.value ? 1.0 : 0.0,
+          opacity: navBarService.isAppBarVisible.value ? 1.0 : 1.0,
           child: AppBar(
-            title: const Text(
-              'Home',
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.w500),
+            title: Padding(
+              padding: const EdgeInsets.only(bottom: 12.0, top: 12.0),
+              child: Text(
+                'Home',
+                style: TextStyle(
+                  fontSize: navBarService.isAppBarVisible.value ? 32 : 28,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
-            elevation: 4,
+            elevation: 0,
           ),
         ),
       );
@@ -29,5 +35,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(76);
 }
