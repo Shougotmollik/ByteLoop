@@ -22,16 +22,8 @@ class ConfirmDialog extends StatelessWidget {
         width: MediaQuery.of(context).size.width / 1.4,
         height: MediaQuery.of(context).size.height / 4,
         decoration: BoxDecoration(
-          color: AppColors.bgColor.withAlpha(220),
+          color: AppColors.bgColor,
           borderRadius: BorderRadius.circular(15.0),
-          boxShadow: [
-            BoxShadow(
-              offset: const Offset(12, 26),
-              blurRadius: 500,
-              spreadRadius: 0.5,
-              color: Colors.purpleAccent.shade700,
-            ),
-          ],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

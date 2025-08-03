@@ -1,4 +1,5 @@
 import 'package:byteloop/services/nav_bar_service.dart';
+import 'package:byteloop/utils/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -23,22 +24,10 @@ class _MainNavBarScreenState extends State<MainNavBarScreen> {
           if (_navBarService.currentIndex.value != 0) {
             _navBarService.backToHomeScreenAndClearStack();
           } else {
-            showDialog(
-              context: context,
-              builder: (_) => AlertDialog(
-                title: const Text('Exit App'),
-                content: const Text('Do you want to exit the app?'),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text('Cancel'),
-                  ),
-                  TextButton(
-                    onPressed: () => SystemNavigator.pop(),
-                    child: const Text('Exit'),
-                  ),
-                ],
-              ),
+            showConfirmDialog(
+              title: 'Exit App',
+              text: 'Do you want to exit the app?',
+              onTap: () => SystemNavigator.pop(),
             );
           }
         }

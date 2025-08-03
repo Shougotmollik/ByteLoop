@@ -36,7 +36,7 @@ class SettingsScreen extends StatelessWidget {
                   color: Colors.redAccent,
                 ),
                 onTap: () {
-                  confirmDialog(
+                  showConfirmDialog(
                     title: 'Are your sure?',
                     text: 'This action logout from Byteloop',
                     onTap: () => settingsController.logOut(),
