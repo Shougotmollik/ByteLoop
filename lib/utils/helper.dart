@@ -86,6 +86,7 @@ void showCustomBottomSheet({required List<BottomSheetItemModel> items}) {
         borderRadius: BorderRadius.vertical(top: Radius.circular(14)),
       ),
       child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           const SizedBox(height: 10),
           Center(
@@ -115,6 +116,7 @@ void showCustomBottomSheet({required List<BottomSheetItemModel> items}) {
                   Get.back();
                   item.onTap();
                 },
+                titleAlignment: ListTileTitleAlignment.center,
               ),
             ),
         ],
