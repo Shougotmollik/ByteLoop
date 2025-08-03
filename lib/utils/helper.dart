@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:byteloop/constant/app_colors.dart';
+import 'package:byteloop/model/BottomSheetItemModel.dart';
 import 'package:byteloop/utils/env.dart';
 import 'package:byteloop/views/widgets/nav_bar/common_widget/confirm_dialog.dart';
 import 'package:flutter/material.dart';
@@ -66,10 +68,59 @@ String getS3Url(String path) {
 }
 
 // * confirm dialog
-void confirmDialog({
+void showConfirmDialog({
   required String title,
   required String text,
   required VoidCallback onTap,
 }) {
   Get.dialog(ConfirmDialog(title: title, text: text, onTap: onTap));
+}
+
+//* Bottom sheet
+void showCustomBottomSheet({required List<BottomSheetItemModel> items}) {
+  Get.bottomSheet(
+    Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+      decoration: const BoxDecoration(
+        color: AppColors.bgColor,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(14)),
+      ),
+      child: Wrap(
+        children: [
+          const SizedBox(height: 10),
+          Center(
+            child: Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: Colors.grey[400],
+                borderRadius: BorderRadius.circular(4),
+              ),
+            ),
+          ),
+          const SizedBox(height: 18),
+          for (var item in items)
+            Card(
+              color: AppColors.authBgColor,
+              elevation: 4,
+              child: ListTile(
+                trailing: item.icon != null
+                    ? Icon(item.icon, color: item.iconColor)
+                    : null,
+                title: Text(
+                  item.title,
+                  style: TextStyle(color: item.titleColor),
+                ),
+                onTap: () {
+                  Get.back();
+                  item.onTap();
+                },
+              ),
+            ),
+        ],
+      ),
+    ),
+    backgroundColor: Colors.transparent,
+    isScrollControlled: true,
+  );
 }

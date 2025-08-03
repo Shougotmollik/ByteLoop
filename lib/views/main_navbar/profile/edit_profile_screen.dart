@@ -92,6 +92,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   hintText: 'Your Description',
                   maxLines: 4,
                   controller: _descriptionTEController,
+                  maxLength: 150,
                 ),
               ],
             ),
@@ -105,6 +106,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     required String hintText,
     required int maxLines,
     required TextEditingController controller,
+    int maxLength = 50,
   }) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 4),
@@ -112,6 +114,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       child: TextFormField(
         controller: controller,
         maxLines: maxLines,
+        maxLength: maxLength,
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: const TextStyle(fontSize: 18, color: Colors.grey),

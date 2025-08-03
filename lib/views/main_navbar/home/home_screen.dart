@@ -1,5 +1,7 @@
 import 'package:byteloop/controllers/home_controller.dart';
+import 'package:byteloop/controllers/profile_controller.dart';
 import 'package:byteloop/services/nav_bar_service.dart';
+import 'package:byteloop/services/supabase_service.dart';
 import 'package:byteloop/views/widgets/nav_bar/common_widget/custom_app_bar.dart';
 import 'package:byteloop/views/widgets/nav_bar/common_widget/custom_circular_progress_indicator.dart';
 import 'package:byteloop/views/widgets/nav_bar/common_widget/custom_radial_background.dart';
@@ -17,6 +19,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final HomeController homeController = Get.find<HomeController>();
   final NavBarService navBarService = Get.find<NavBarService>();
+  final ProfileController profileController = Get.find<ProfileController>();
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +47,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               physics: const BouncingScrollPhysics(),
                               itemBuilder: (context, index) => QueryCard(
                                 query: homeController.queries[index],
+                                isAuthCard:
+                                    homeController.queries[index].userId ==
+                                    SupabaseService.client.auth.currentUser?.id,
+                                callback: profileController.deleteQuery,
                               ),
                             ),
                     ),

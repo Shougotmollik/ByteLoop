@@ -172,7 +172,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               padding: const EdgeInsets.only(top: 10),
               itemCount: profileController.queries.length,
               itemBuilder: (context, index) {
-                return QueryCard(query: profileController.queries[index]);
+                return QueryCard(
+                  query: profileController.queries[index],
+                  isAuthCard: true,
+                  callback: profileController.deleteQuery,
+                );
               },
             ),
     );

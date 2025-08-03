@@ -142,4 +142,35 @@ class ProfileController extends GetxController {
       showSnackBar('Failed', 'Something went wrong');
     }
   }
+
+  //* Delete Query
+  Future<void> deleteQuery(int postId) async {
+    try {
+      await SupabaseService.client
+          .from("notifications")
+          .delete()
+          .eq("post_id", postId);
+
+      await SupabaseService.client.from("posts").delete().eq("id", postId);
+
+      queries.removeWhere((element) => element.id == postId);
+
+      if (Get.isDialogOpen == true) Get.back();
+      showSnackBar('Success', 'Post deleted successfully!');
+    } catch (e) {
+      showSnackBar('Failed', 'Something went wrong');
+    }
+  }
+
+  //* Delete Replies
+  Future<void> deleteReply(int replyId) async {
+    try {
+      await SupabaseService.client.from("comments").delete().eq("id", replyId);
+      replies.removeWhere((element) => element.id == replyId);
+      if (Get.isDialogOpen == true) Get.back();
+      showSnackBar('Success', 'Query deleted successfully!');
+    } catch (e) {
+      showSnackBar('Failed', 'Something went wrong');
+    }
+  }
 }
