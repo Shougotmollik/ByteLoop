@@ -11,6 +11,7 @@ import 'package:byteloop/views/main_navbar/profile/profile_screen.dart';
 import 'package:byteloop/views/main_navbar/profile/show_user_profile.dart';
 import 'package:byteloop/views/main_navbar/query/show_asset.dart';
 import 'package:byteloop/views/main_navbar/query/show_query_screen.dart';
+import 'package:byteloop/views/main_navbar/search/search_screen.dart';
 import 'package:byteloop/views/main_navbar/settings/settings_screen.dart';
 import 'package:get/get.dart';
 
@@ -46,6 +47,12 @@ class Routes {
       name: RouteNames.mainNavBarScreen,
       page: () => const MainNavBarScreen(),
       transition: Transition.fadeIn,
+      binding: ControllerBinder(),
+    ),
+    GetPage(
+      name: RouteNames.searchScreen,
+      page: () => const SearchScreen(),
+      transition: Transition.rightToLeft,
       binding: ControllerBinder(),
     ),
     GetPage(

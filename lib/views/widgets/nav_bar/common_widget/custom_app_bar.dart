@@ -1,6 +1,8 @@
+import 'package:byteloop/routes/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:byteloop/services/nav_bar_service.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -12,7 +14,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Obx(() {
       return AnimatedContainer(
         duration: const Duration(milliseconds: 300),
-        height: navBarService.isAppBarVisible.value ? 76 : 52,
+        height: navBarService.isAppBarVisible.value ? 76 : 68,
         child: AnimatedOpacity(
           duration: const Duration(milliseconds: 300),
           opacity: navBarService.isAppBarVisible.value ? 1.0 : 1.0,
@@ -22,12 +24,23 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: Text(
                 'Home',
                 style: TextStyle(
-                  fontSize: navBarService.isAppBarVisible.value ? 32 : 28,
+                  fontSize: navBarService.isAppBarVisible.value ? 32 : 22,
                   fontWeight: FontWeight.w500,
                 ),
               ),
             ),
-            elevation: 0,
+            elevation: 4,
+            actions: [
+              IconButton(
+                onPressed: () {
+                  Get.toNamed(RouteNames.searchScreen);
+                },
+                icon: Icon(
+                  Iconsax.user_search_copy,
+                  size: navBarService.isAppBarVisible.value ? 22 : 18,
+                ),
+              ),
+            ],
           ),
         ),
       );

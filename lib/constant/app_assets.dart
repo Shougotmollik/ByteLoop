@@ -3,4 +3,6 @@ class AppAssets {
   static const String imageLogo = 'assets/logos/image_logo.png';
 
   static const String profileAvatar = 'assets/images/profile_avatar.png';
+
+  static const String lottieSearch = 'assets/lottie/searchUser.json';
 }

@@ -1,4 +1,5 @@
 import 'package:byteloop/controllers/search_user_controller.dart';
+import 'package:byteloop/views/main_navbar/search/lottie_search_widget.dart';
 import 'package:byteloop/views/widgets/nav_bar/common_widget/custom_circular_progress_indicator.dart';
 import 'package:byteloop/views/widgets/nav_bar/common_widget/custom_radial_background.dart';
 import 'package:byteloop/views/widgets/nav_bar/common_widget/search_input.dart';
@@ -75,9 +76,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               controller.notFound.value == true)
                             const Text('No user found')
                           else
-                            const Center(
-                              child: Text("search users by their username"),
-                            ),
+                            const LottieSearchWidget(),
                         ],
                       ),
               ),

@@ -20,7 +20,7 @@ class UserTile extends StatelessWidget {
         padding: const EdgeInsets.only(top: 5.0),
         child: CustomCircleAvatar(url: user.metadata?.image),
       ),
-      title: Text(user.metadata!.name!),
+      title: Expanded(child: Text(user.metadata!.name!)),
       titleAlignment: ListTileTitleAlignment.top,
       subtitle: Text(user.metadata!.description!),
       trailing: OutlinedButton(
