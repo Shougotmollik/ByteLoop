@@ -4,7 +4,6 @@ import 'package:byteloop/views/auth/login_screen.dart';
 import 'package:byteloop/views/auth/register_screen.dart';
 import 'package:byteloop/views/auth/splash_screen.dart';
 import 'package:byteloop/views/auth/welcome_screen.dart';
-import 'package:byteloop/views/main_navbar/contest/contest_details_screen.dart';
 import 'package:byteloop/views/main_navbar/home/add_reply_screen.dart';
 import 'package:byteloop/views/main_navbar/main_nav_bar_screen.dart';
 import 'package:byteloop/views/main_navbar/notification/notification_screen.dart';
