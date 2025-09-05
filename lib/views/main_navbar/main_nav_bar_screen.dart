@@ -59,8 +59,8 @@ class _MainNavBarScreenState extends State<MainNavBarScreen> {
                         label: 'Home',
                       ),
                       NavigationDestination(
-                        icon: Icon(Iconsax.search_normal_1_copy),
-                        selectedIcon: Icon(Iconsax.search_normal_1),
+                        icon: Icon(Iconsax.box_search_copy),
+                        selectedIcon: Icon(Iconsax.box_search),
                         label: 'Search',
                       ),
                       NavigationDestination(
@@ -69,8 +69,8 @@ class _MainNavBarScreenState extends State<MainNavBarScreen> {
                         label: 'Query',
                       ),
                       NavigationDestination(
-                        icon: Icon(Iconsax.heart_copy),
-                        selectedIcon: Icon(Iconsax.heart),
+                        icon: Icon(Iconsax.document_code_2_copy),
+                        selectedIcon: Icon(Iconsax.document_code_2),
                         label: 'Notifications',
                       ),
                       NavigationDestination(

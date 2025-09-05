@@ -5,6 +5,7 @@ class RouteNames {
   static String welcomeScreen = '/welcomeScreen';
   static String profileScreen = '/profileScreen';
   static String searchScreen = '/searchScreen';
+  static String notificationScreen = '/notificationScreen';
 
   static String mainNavBarScreen = '/mainNavBarScreen';
   static String editProfileScreen = '/editProfileScreen';
@@ -13,4 +14,5 @@ class RouteNames {
   static String showQueryScreen = '/showQueryScreen';
   static String showAssets = '/showAssets';
   static String showUserProfile = '/showUserProfile';
+  static String contestDetails = '/contestDetails';
 }

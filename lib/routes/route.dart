@@ -4,8 +4,10 @@ import 'package:byteloop/views/auth/login_screen.dart';
 import 'package:byteloop/views/auth/register_screen.dart';
 import 'package:byteloop/views/auth/splash_screen.dart';
 import 'package:byteloop/views/auth/welcome_screen.dart';
+import 'package:byteloop/views/main_navbar/contest/contest_details_screen.dart';
 import 'package:byteloop/views/main_navbar/home/add_reply_screen.dart';
 import 'package:byteloop/views/main_navbar/main_nav_bar_screen.dart';
+import 'package:byteloop/views/main_navbar/notification/notification_screen.dart';
 import 'package:byteloop/views/main_navbar/profile/edit_profile_screen.dart';
 import 'package:byteloop/views/main_navbar/profile/profile_screen.dart';
 import 'package:byteloop/views/main_navbar/profile/show_user_profile.dart';
@@ -52,6 +54,12 @@ class Routes {
     GetPage(
       name: RouteNames.searchScreen,
       page: () => const SearchScreen(),
+      transition: Transition.rightToLeft,
+      binding: ControllerBinder(),
+    ),
+    GetPage(
+      name: RouteNames.notificationScreen,
+      page: () => const NotificationScreen(),
       transition: Transition.rightToLeft,
       binding: ControllerBinder(),
     ),

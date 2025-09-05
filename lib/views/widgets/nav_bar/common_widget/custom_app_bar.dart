@@ -40,6 +40,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   size: navBarService.isAppBarVisible.value ? 22 : 18,
                 ),
               ),
+              IconButton(
+                onPressed: () {
+                  Get.toNamed(RouteNames.notificationScreen);
+                },
+                icon: Icon(
+                  Iconsax.notification_copy,
+                  size: navBarService.isAppBarVisible.value ? 22 : 18,
+                ),
+              ),
             ],
           ),
         ),
