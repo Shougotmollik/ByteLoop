@@ -11,7 +11,7 @@ class ContestScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ContestController());
+    final ContestController controller = Get.find<ContestController>();
     return Scaffold(
       appBar: AppBar(title: const Text("Codeforces Contests")),
       extendBodyBehindAppBar: true,
