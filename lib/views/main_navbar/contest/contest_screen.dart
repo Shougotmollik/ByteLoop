@@ -4,7 +4,6 @@ import 'package:byteloop/views/main_navbar/contest/contest_details_screen.dart';
 import 'package:byteloop/views/widgets/nav_bar/common_widget/custom_radial_background.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:timeago/timeago.dart' as timeago;
 
 class ContestScreen extends StatelessWidget {
   const ContestScreen({super.key});
@@ -31,11 +30,6 @@ class ContestScreen extends StatelessWidget {
             itemCount: controller.contests.length,
             itemBuilder: (context, index) {
               final contest = controller.contests[index];
-
-              int seconds = contest.durationSeconds;
-              DateTime endTime = DateTime.now().subtract(
-                Duration(seconds: seconds),
-              );
               return Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16.0,
