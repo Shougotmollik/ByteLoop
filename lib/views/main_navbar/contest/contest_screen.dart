@@ -111,9 +111,9 @@ class ContestScreen extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    timeago.format(endTime, allowFromNow: true),
+                                    "Duration ${contest.durationSeconds ~/ 3600}h",
                                     style: const TextStyle(
-                                      fontSize: 12,
+                                      fontSize: 14,
                                       color: Colors.white60,
                                     ),
                                   ),
