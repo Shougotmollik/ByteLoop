@@ -23,6 +23,7 @@ class ControllerBinder extends Bindings {
     Get.lazyPut<NotificationController>(() => NotificationController());
     Get.lazyPut<SearchUserController>(() => SearchUserController());
     Get.lazyPut<ContestController>(() => ContestController());
+    // Get.lazyPut<ChatbotController>(() => ChatbotController(geminiService: null));
 
     //   Service bindings
     Get.lazyPut<SupabaseService>(() => SupabaseService());

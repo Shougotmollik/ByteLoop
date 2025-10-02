@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:byteloop/constant/app_colors.dart';
-import 'package:byteloop/model/BottomSheetItemModel.dart';
+import 'package:byteloop/model/bottom_sheet_item_model.dart';
 import 'package:byteloop/utils/env.dart';
 import 'package:byteloop/views/widgets/nav_bar/common_widget/confirm_dialog.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:byteloop/model/BottomSheetItemModel.dart';
+import 'package:byteloop/model/bottom_sheet_item_model.dart';
 import 'package:byteloop/model/query_model.dart';
 import 'package:byteloop/routes/route_names.dart';
 import 'package:byteloop/services/nav_bar_service.dart';

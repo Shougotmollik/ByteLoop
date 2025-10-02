@@ -1,5 +1,5 @@
 import 'package:byteloop/controllers/settings_controller.dart';
-import 'package:byteloop/model/BottomSheetItemModel.dart';
+import 'package:byteloop/model/bottom_sheet_item_model.dart';
 import 'package:byteloop/services/supabase_service.dart';
 import 'package:byteloop/utils/helper.dart';
 import 'package:byteloop/views/widgets/nav_bar/common_widget/custom_radial_background.dart';

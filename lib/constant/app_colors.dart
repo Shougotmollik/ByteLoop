@@ -12,4 +12,6 @@ class AppColors {
   static const Color facebookBtnColor = Color(0xff4267B2);
 
   static const Color purpleBgColor = Color.fromARGB(160, 60, 0, 90);
+
+  static Color purpleColor = Colors.purple;
 }

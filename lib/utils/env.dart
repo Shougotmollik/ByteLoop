@@ -4,4 +4,7 @@ class Env {
   static final String supabaseUrl = dotenv.env["SUPABASE_URL"]!;
   static final String supabaseKey = dotenv.env["SUPABASE_KEY"]!;
   static final String s3Bucket = dotenv.env["S3_BUCKET"]!;
+
+  static final String chatGptKey = dotenv.env["CHATGPT_KEY"]!;
+  static final String geminiKey = dotenv.env["GEMINI_API"]!;
 }
